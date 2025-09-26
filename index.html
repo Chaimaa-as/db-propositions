@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propositions Design - David B. Storyteller</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #6B7280;
+            --accent: #7C3AED;
+            --bg-light: #F9FAFB;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .presentation-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .presentation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .presentation-subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .client-brief {
+            background: linear-gradient(135deg, var(--accent), #A855F7);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .client-brief h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .concepts-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-button {
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--secondary);
+        }
+
+        .nav-button.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .nav-button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .nav-button.active:hover {
+            color: white;
+        }
+
+        /* Concept Cards */
+        .concept-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .concept-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+        }
+
+        .concept-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .concept-number {
+            font-size: 3rem;
+            font-weight: 700;
+            opacity: 0.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Content Grid */
+        .concept-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 0;
+        }
+
+        .concept-description {
+            padding: 2rem;
+        }
+
+        .concept-specs {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-left: 1px solid var(--border);
+        }
+
+        .description-section {
+            margin-bottom: 2rem;
+        }
+
+        .description-section h4 {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .description-section p {
+            color: var(--secondary);
+            line-height: 1.7;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .pros {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        .cons {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+        }
+
+        .pros h5, .cons h5 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pros h5 { color: var(--success); }
+        .cons h5 { color: var(--warning); }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .pros li, .cons li {
+            margin-bottom: 0.25rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .pros li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .cons li::before {
+            content: '!';
+            position: absolute;
+            left: 0;
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        /* Specs */
+        .spec-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-list li {
+            padding: 0.25rem 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Preview Button */
+        .preview-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .preview-button:hover {
+            background: #6D28D9;
+            transform: translateY(-2px);
+        }
+
+        /* Recommendation */
+        .recommendation {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .recommendation h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .presentation-footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .concept-content {
+                grid-template-columns: 1fr;
+            }
+
+            .concept-specs {
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .presentation-container {
+                padding: 1rem;
+            }
+
+            .concepts-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .presentation-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Header -->
+        <header class="presentation-header">
+            <h1 class="presentation-title">Propositions Design</h1>
+            <p class="presentation-subtitle">3 concepts sur mesure pour votre portfolio de storyteller, inspirés de vos références et de votre univers créatif</p>
+            
+            <div class="client-brief">
+                <h3>Brief Client</h3>
+                <p><strong>Profil :</strong> Storyteller & critique parisien, amateur de cinéma et analyste culturel</p>
+                <p><strong>Références :</strong> hannahshelley.neocities.org (listing élégant), adrienscholaert.fr, alvinschang.com</p>
+                <p><strong>Univers :</strong> Sophistication parisienne, passion pour Prince, écriture incisive et cultivée</p>
+                <p><strong>Contenu :</strong> Articles longs, critiques cinéma, analyses culturelles (2003-2023)</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="concepts-nav">
+            <button class="nav-button active" onclick="showConcept(0)">Concept 1</button>
+            <button class="nav-button" onclick="showConcept(1)">Concept 2</button>
+            <button class="nav-button" onclick="showConcept(2)">Concept 3</button>
+        </nav>
+
+        <!-- Concept 1 -->
+        <section class="concept-section active">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #1a1a1a 0%, #6B46C1 100%);">
+                    <div class="concept-number">01</div>
+                    <h2 class="concept-title">Minimaliste Parisien</h2>
+                    <p class="concept-tagline">"L'élégance dans la simplicité"</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Inspiré de vos références sophistiquées, ce concept privilégie la lisibilité et l'élégance. L'approche minimaliste met vos textes au centre, avec une typographie soignée qui reflète votre culture parisienne.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Expérience Utilisateur</h4>
+                            <p>Navigation claire, grille classique, focus sur la lecture. Le design s'efface devant le contenu, comme dans les meilleures publications littéraires. Parfait pour un storyteller qui privilégie la substance.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p>Vos écrits sont sophistiqués et méritent un écrin à leur hauteur. Ce design respecte vos 20 ans d'archives tout en offrant une modernité discrète. L'accent violet rend hommage à Prince sans ostentation.</p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Points Forts</h5>
+                                <ul>
+                                    <li>Lisibilité optimale</li>
+                                    <li>Élégance intemporelle</li>
+                                    <li>Focus sur le contenu</li>
+                                    <li>Adaptable mobile</li>
+                                    <li>SEO-friendly</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Peut sembler "classique"</li>
+                                    <li>Moins distinctif</li>
+                                    <li>Impact visuel limité</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : Playfair Display</li>
+                                <li>Texte : IBM Plex Mono</li>
+                                <li>Accent : Sophistication</li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch" style="background: #1a1a1a;"></div>
+                                <div class="color-swatch" style="background: #6B46C1;"></div>
+                                <div class="color-swatch" style="background: #fafafa;"></div>
+                                <div class="color-swatch" style="background: #666;"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li>Navigation fixe</li>
+                                <li>Grille articles responsive</li>
+                                <li>Catégorisation</li>
+                                <li>Pagination</li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li>Presse parisienne haut de gamme</li>
+                                <li>Publications littéraires</li>
+                                <li>Blogs culturels premium</li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-1-minimalisteParisien.html" onclick="showPreview(0)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept 2 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #0a0a0a 0%, #7C3AED 100%);">
+                    <div class="concept-number">02</div>
+                    <h2 class="concept-title">Archive Sophistiquée</h2>
+                    <p class="concept-tagline">"Le listing réinventé"</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Directement inspiré de votre référence favorite (hannahshelley.neocities.org), ce concept transforme le listing en expérience sophistiquée. Chaque article devient une entrée d'archive précieuse, avec une recherche intégrée.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Expérience Utilisateur</h4>
+                            <p>Format chronologique avec métadonnées riches, tags, extraits. Idéal pour vos 20 ans d'archives. La recherche permet de naviguer dans votre corpus comme dans une bibliothèque personnelle.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p>Respecte exactement vos goûts (listing mais sophistiqué) 
+                                tout en valorisant l'ampleur de votre travail. L'aspect "archives" 
+                                colle parfaitement à votre statut d'observateur culturel de long terme.</p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Points Forts</h5>
+                                <ul>
+                                    <li>Correspond à vos références</li>
+                                    <li>Valorise les archives</li>
+                                    <li>Recherche intégrée</li>
+                                    <li>Navigation chronologique</li>
+                                    <li>Scaling excellent</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Moins visuel</li>
+                                    <li>Approche très textuelle</li>
+                                    <li>Peut sembler austère</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : Crimson Text</li>
+                                <li>Texte : JetBrains Mono</li>
+                                <li>Accent : Modernité technique</li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch" style="background: #0a0a0a;"></div>
+                                <div class="color-swatch" style="background: #7C3AED;"></div>
+                                <div class="color-swatch" style="background: #fafafa;"></div>
+                                <div class="color-swatch" style="background: #737373;"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li>Recherche full-text</li>
+                                <li>Tri par date/catégorie</li>
+                                <li>Tags interactifs</li>
+                                <li>Statistiques</li>
+                                <li>Archive complète</li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li>Hannah Shelley (votre référence)</li>
+                                <li>Archives numériques</li>
+                                <li>Bases de données culturelles</li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-2-archiveSophistiquee.html" onclick="showPreview(1)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept 3 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">03</div>
+                    <h2 class="concept-title">Purple Rain</h2>
+                    <p class="concept-tagline">"Hommage à l'Artist"</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Un hommage assumé à votre passion pour Prince. 
+                                Design audacieux avec dégradés violets, animations subtiles, 
+                                et une esthétique moderne qui fait écho à l'innovation artistique 
+                                de l'Artist. Parfait pour un storyteller qui n'a pas peur de se 
+                                démarquer.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Expérience Utilisateur</h4>
+                            <p>Interface immersive avec effets visuels soignés, typography expressive, et une navigation fluide. Le design devient partie intégrante de votre storytelling, créant une expérience mémorable qui colle à votre personnalité créative.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p>Parce que votre passion pour Prince mérite d'être assumée ! Ce design vous distingue immédiatement, crée une identité visuelle forte, et montre que vous n'avez pas peur de l'audace créative. Parfait pour un storyteller qui marque les esprits.</p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Points Forts</h5>
+                                <ul>
+                                    <li>Identité visuelle unique</li>
+                                    <li>Mémorable</li>
+                                    <li>Exprime votre personnalité</li>
+                                    <li>Design moderne</li>
+                                    <li>Impact émotionnel</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Plus polarisant</li>
+                                    <li>Peut lasser à long terme</li>
+                                    <li>Risque de démodé</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : Playfair Display</li>
+                                <li>Texte : Space Mono</li>
+                                <li>Accent : Expressivité</li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch" style="background: #4C1D95;"></div>
+                                <div class="color-swatch" style="background: #8B5CF6;"></div>
+                                <div class="color-swatch" style="background: #C4B5FD;"></div>
+                                <div class="color-swatch" style="background: #0F0F23;"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li>Animations CSS avancées</li>
+                                <li>Effets de parallaxe</li>
+                                <li>Transitions fluides</li>
+                                <li>Mode sombre natif</li>
+                                <li>Design immersif</li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li>Purple Rain (évidemment !)</li>
+                                <li>Esthétique musicale moderne</li>
+                                <li>Portfolios créatifs premium</li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-3-purpleRain.html" onclick="showPreview(2)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept 4 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">03</div>
+                    <h2 class="concept-title">Brutalist Minimaliste</h2>
+                    <p class="concept-tagline">Clean, moderne avec une âme</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Approche contemporaine qui met le contenu en avant. Design épuré mais pas froid, avec des touches de violet Prince et des interactions subtiles qui reflètent votre personnalité critique et directe.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Points forts techniques</h4>
+                                  <ul>
+                                    <li>Typography moderne (Inter + JetBrains Mono)</li>
+                                    <li>Curseur personnalisé interactif</li>
+                                    <li>Animations micro-interactions</li>
+                                    <li>Excellent pour le référencement</li>
+                                    <li>Chargement ultra-rapide</li>
+                                </ul>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p></p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Avantages</h5>
+                                <ul>
+                                    <li>Professionnel et intemporel</li>
+                                    <li>Met en valeur vos textes</li>
+                                    <li>Excellent référencement</li>
+                                    <li>Facilement évolutif</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Peut sembler "classique"</li>
+                                    <li>Moins de personnalité visuelle</li>
+                                    <li>Commun dans le milieu marketing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : </li>
+                                <li>Texte : </li>
+                                <li>Accent : </li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-4-brutalistMinimaliste.html" onclick="showPreview(3)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept 5 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">05</div>
+                    <h2 class="concept-title">Neocities Nostalgique</h2>
+                    <p class="concept-tagline">Web vintage, esprit rebelle</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Directement inspiré de votre site préféré (hannahshelley.neocities.org). Esthétique web des années 90/2000 avec néons, animations et un côté décalé qui colle parfaitement à votre personnalité anti-conformiste.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Points forts créatifs</h4>
+                                  <ul>
+                                    <li>Esthétique neocities authentique</li>
+                                    <li>Effets néons et animations nostalgiques</li>
+                                    <li>Hommage intégré à Prince</li>
+                                    <li>Compteur de visiteurs vintage</li>
+                                    <li>Personnalité ultra-marquée</li>
+                                </ul>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p></p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Avantages</h5>
+                                <ul>
+                                    <li>Unique et mémorable</li>
+                                    <li>Correspond à vos goûts</li>
+                                    <li>Anti-conformiste assumé</li>
+                                    <li>Storytelling visuel fort</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Peut rebuter certains clients</li>
+                                    <li>Lisibilité parfois difficile</li>
+                                    <li>Niche très spécifique</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : </li>
+                                <li>Texte : </li>
+                                <li>Accent : </li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-5-neocitiesNostalgique.html" onclick="showPreview(3)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept 6 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">06</div>
+                    <h2 class="concept-title">Modern Editorial</h2>
+                    <p class="concept-tagline">Magazine haut de gamme</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Approche éditoriale raffinée qui met en valeur votre expertise critique. Typography élégante, mise en page magazine avec des touches violettes subtiles. Parfait équilibre entre professionnalisme et personnalité.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Points forts éditoriaux</h4>
+                                  <ul>
+                                    <li>Typography Playfair Display premium</li>
+                                    <li>Mise en page magazine</li>
+                                    <li>Grain texture subtile</li>
+                                    <li>Gradients Prince discrets</li>
+                                    <li>Lecture optimisée</li>
+                                </ul>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p></p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Avantages</h5>
+                                <ul>
+                                    <li>Élégant et sophistiqué</li>
+                                    <li>Excellent pour la lecture</li>
+                                    <li>Crédibilité maximum</li>
+                                    <li>Vieillit bien avec le temps</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Peut sembler "safe"</li>
+                                    <li>Moins de caractère</li>
+                                    <li>Références Prince discrètes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : </li>
+                                <li>Texte : </li>
+                                <li>Accent : </li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                                <div class="color-swatch"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-5-neocitiesNostalgique.html" onclick="showPreview(3)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Concept 7 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">07</div>
+                    <h2 class="concept-title">Purple Rain</h2>
+                    <p class="concept-tagline">Hommage à Prince</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>Un design qui capture l'essence mystique de Prince avec des violets profonds et des effets de glow subtils. 
+                        Parfait pour un storyteller qui veut une identité forte et mémorable.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Points forts</h4>
+                                  <ul>
+                                    <li>Palette inspirée de l'univers Prince</li>
+                                    <li>Effets lumineux subtils</li>
+                                    <li>Ambiance premium et mystique</li>
+                                    <li>Typography monospace vintage</li>
+                                </ul>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p></p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Avantages</h5>
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : </li>
+                                <li>Texte : </li>
+                                <li>Accent : </li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch" style="background: #9932cc;" title="Violet principal"></div>
+                                <div class="color-swatch" style="background: #2a0845;" title="Arrière-plan foncé"></div>
+                                <div class="color-swatch" style="background: #e6e6fa;" title="Texte principal"></div>
+                                <div class="color-swatch" style="background: #dda0dd;" title="Accents"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-7-purpleRain2.html" onclick="showPreview(3)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Concept 8 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">08</div>
+                    <h2 class="concept-title">Terminal Vintage</h2>
+                    <p class="concept-tagline">Nostalgie années 90</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p> Plongée totale dans l'esthétique terminal/hacker des années 90. 
+                        Avec effet CRT et lignes de balayage pour une authenticité maximale.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Points forts</h4>
+                                  <ul>
+                                    <li>Effet CRT authentique</li>
+                                    <li>Interface type terminal</li>
+                                    <li>Nostalgie pure web vintage</li>
+                                    <li>Esthétique hacker/geek</li>
+                                </ul>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p></p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Avantages</h5>
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : </li>
+                                <li>Texte : </li>
+                                <li>Accent : </li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch" style="background: #00ff00;" title="Vert terminal"></div>
+                                <div class="color-swatch"  style="background: #000000;" title="Noir absolu"></div>
+                                <div class="color-swatch"  style="background: #ffffff;" title="Blanc pur"></div>
+                                <div class="color-swatch" style="background: #333333;" title="Gris foncé"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-8-Terminal Vintage.html" onclick="showPreview(3)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept 9 -->
+        <section class="concept-section">
+            <div class="concept-card">
+                <div class="concept-header" style="background: linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%);">
+                    <div class="concept-number">08</div>
+                    <h2 class="concept-title">Brutalist Minimal2</h2>
+                    <p class="concept-tagline">Ultra épuré</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-description">
+                        <div class="description-section">
+                            <h4>Philosophie Design</h4>
+                            <p>       Minimalisme radical avec un contraste noir/blanc maximal. 
+                        Pour un puriste qui veut laisser le contenu parler sans distraction.</p>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Points forts</h4>
+                                  <ul>
+                                    <li>Contraste maximum</li>
+                                    <li>Typographie impeccable</li>
+                                    <li>Radicalité minimaliste</li>
+                                    <li>Intemporel et impactant</li>
+                                </ul>
+                        </div>
+
+                        <div class="description-section">
+                            <h4>Pourquoi ce choix ?</h4>
+                            <p></p>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h5>Avantages</h5>
+                                <ul>
+                                    <li>Élégant et sophistiqué</li>
+                                    <li>Excellent pour la lecture</li>
+                                    <li>Crédibilité maximum</li>
+                                    <li>Vieillit bien avec le temps</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h5>Limitations</h5>
+                                <ul>
+                                    <li>Peut sembler "safe"</li>
+                                    <li>Moins de caractère</li>
+                                    <li>Références Prince discrètes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-specs">
+                        <div class="spec-group">
+                            <div class="spec-title">Typographie</div>
+                            <ul class="spec-list">
+                                <li>Titres : </li>
+                                <li>Texte : </li>
+                                <li>Accent : </li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Palette Couleurs</div>
+                            <div class="color-palette">
+                                <div class="color-swatch" style="background: #000000;" title="Noir pur"></div>
+                                <div class="color-swatch" style="background: #ffffff; border: 1px solid #ccc;" title="Blanc pur"></div>
+                                <div class="color-swatch" style="background: #666666;" title="Gris moyen"></div>
+                                <div class="color-swatch"  style="background: #999999;" title="Gris clair"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Fonctionnalités</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="spec-group">
+                            <div class="spec-title">Inspiration</div>
+                            <ul class="spec-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <a href="/concept-5-neocitiesNostalgique.html" onclick="showPreview(3)" class="preview-button">Voir la démo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendation -->
+        <div class="recommendation">
+            <h3>Recommandation</h3>
+            <p>Pour votre profil de storyteller sophistiqué, je recommande le <strong>Concept 2 - Archive Sophistiquée</strong>. Il respecte parfaitement vos références, valorise vos 20 ans d'écriture, et offre l'expérience de navigation élégante que vous recherchez. Un choix sûr qui grandit avec votre contenu.</p>
+            <br>
+            <p><em>Le Concept 3 serait mon coup de cœur si vous voulez vraiment vous démarquer et assumer votre univers Prince !</em></p>
+            <p><em>Après analyse de votre profil et de vos références, je recommande fortement la Version 5 • Neocities Nostalgique. Elle correspond parfaitement à votre personnalité, vos goûts esthétiques et votre positionnement anti-conformiste. C'est audacieux, mémorable et authentiquement vous.</em></p>
+            <p><em><strong>Design 7 "Purple Rain"</strong> - Ce design honore parfaitement votre passion pour Prince tout en conservant 
+                l'esprit rétro et minimaliste que vous recherchez. Il crée une identité forte et mémorable, 
+                rare dans l'univers du marketing digital. C'est le parfait équilibre entre authenticité vintage 
+                et professionnalisme moderne pour un storyteller qui veut se démarquer.</em></p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="presentation-footer">
+            <p>Présentation créée spécialement pour David B. • Prêt pour validation et développement</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Chaque concept peut être personnalisé selon vos retours</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentConcept = 0;
+        const concepts = document.querySelectorAll('.concept-section');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        function showConcept(index) {
+            // Hide all concepts
+            concepts.forEach(concept => concept.classList.remove('active'));
+            navButtons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected concept
+            concepts[index].classList.add('active');
+            navButtons[index].classList.add('active');
+            
+            currentConcept = index;
+        }
+
+        function showPreview(conceptIndex) {
+            // Cette fonction ouvrira la démo correspondante
+            const demos = [
+                '#storyteller_portfolio_v1', // Concept 1
+                '#storyteller_portfolio_v2', // Concept 2  
+                '#storyteller_portfolio_v3'  // Concept 3
+            ];
+            
+            alert(`Ouverture de la démo du Concept ${conceptIndex + 1}...\n\nDans un vrai projet, ceci ouvrirait ${demos[conceptIndex]} dans un nouvel onglet.`);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentConcept > 0) {
+                showConcept(currentConcept - 1);
+            } else if (e.key === 'ArrowRight' && currentConcept < concepts.length - 1) {
+                showConcept(currentConcept + 1);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David B. - Storyteller</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --accent-color: #6B46C1;
+            --text-muted: #666;
+            --bg-light: #fafafa;
+            --border-light: #e5e5e5;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #fff;
+            color: var(--primary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-color);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+
+        /* Articles Grid */
+        .articles-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-card {
+            border: 1px solid var(--border-light);
+            padding: 0;
+            transition: all 0.3s ease;
+            background: white;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-light);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+        }
+
+        /* Purple Prince-inspired accent */
+        .prince-accent {
+            color: var(--accent-color);
+        }
+
+        .loading-animation {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .loading-animation:nth-child(1) { animation-delay: 0.1s; }
+        .loading-animation:nth-child(2) { animation-delay: 0.2s; }
+        .loading-animation:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">David</a>
+                <ul class="nav-links">
+                    <li><a href="#articles">Articles</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Storyteller & <span class="prince-accent">Critique</span></h1>
+                <p class="subtitle">Des histoires qui comptent, des mots qui marquent</p>
+                <a href="#articles" class="cta-button">Découvrir mes écrits</a>
+            </div>
+        </section>
+
+        <section class="articles-section" id="articles">
+            <div class="container">
+                <h2 class="section-title">Derniers Articles</h2>
+                <div class="articles-grid">
+                    <article class="article-card loading-animation">
+                        <div class="article-image">Cinéma</div>
+                        <div class="article-content">
+                            <span class="article-category">Critique</span>
+                            <time class="article-date">2023-09-10</time>
+                            <h3 class="article-title">Mange, Prie, Aime : Lettre à une chère enfant</h3>
+                            <p class="article-excerpt">Une critique acerbe d'un film qu'il ne faut surtout pas aller voir, expliquée avec toute la tendresse possible...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card loading-animation">
+                        <div class="article-image">BMW Films</div>
+                        <div class="article-content">
+                            <span class="article-category">Publicité</span>
+                            <time class="article-date">2019-07-04</time>
+                            <h3 class="article-title">Fast, Furious & Publicité</h3>
+                            <p class="article-excerpt">Quand BMW révolutionne la pub avec des courts-métrages de maîtres : Fincher, Ridley Scott, Wong Kar Wai...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card loading-animation">
+                        <div class="article-image">Tourisme</div>
+                        <div class="article-content">
+                            <span class="article-category">Analyse</span>
+                            <time class="article-date">2017-03-09</time>
+                            <h3 class="article-title">Et si on partait ? Et si on restait ?</h3>
+                            <p class="article-excerpt">Analyse des campagnes touristiques : de l'Australie rococo-baroque à la simplicité indienne...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card loading-animation">
+                        <div class="article-image">Cinéma</div>
+                        <div class="article-content">
+                            <span class="article-category">Journal</span>
+                            <time class="article-date">2020-01-11</time>
+                            <h3 class="article-title">Je vais au cinéma</h3>
+                            <p class="article-excerpt">Sound of Noise, Love & Other Drugs, Somewhere : périgrinations cinématographiques d'une nuit parisienne...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card loading-animation">
+                        <div class="article-image">Dans ses yeux</div>
+                        <div class="article-content">
+                            <span class="article-category">Critique</span>
+                            <time class="article-date">2010-05-10</time>
+                            <h3 class="article-title">De vous à moi, les yeux dans les yeux</h3>
+                            <p class="article-excerpt">Retour sur le film argentin oscarisé : entre McDo, cinéma et soirée arrosée...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card loading-animation">
+                        <div class="article-image">Police</div>
+                        <div class="article-content">
+                            <span class="article-category">Histoire</span>
+                            <time class="article-date">2003-11-05</time>
+                            <h3 class="article-title">Mais que fait la police ?</h3>
+                            <p class="article-excerpt">Plongée dans l'Histoire et dictionnaire de la police, des argots aux grandes figures...</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Storyteller parisien</h3>
+                    <p>Entre critique cinéma et analyse culturelle, des histoires qui donnent du sens aux images.</p>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <p>Pour collaborations & projets<br>
+                    <a href="mailto:hello@david.fr">hello@david.fr</a></p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

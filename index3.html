@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Story Teller - 13 Propositions de Design</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #6B7280;
+            --accent: #7C3AED;
+            --bg-light: #F9FAFB;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .presentation-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      /* .header {
+        text-align: center;
+        margin-bottom: 60px;
+        color: white;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.3rem;
+        opacity: 0.9;
+        font-weight: 300;
+      } */
+       /* Header */
+        .presentation-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .presentation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .presentation-subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .client-brief {
+            background: linear-gradient(135deg, var(--accent), #A855F7);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .client-brief h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+
+      .intro-section {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 50px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .intro-section h2 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+        color: #2d3748;
+      }
+
+      .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .analysis-item {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .analysis-item h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .analysis-item ul {
+            list-style: none;
+        }
+        
+        .analysis-item li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            color: #4a5568;
+        }
+        
+        .analysis-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+      .designs-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        margin-bottom: 50px;
+      }
+
+      .design-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .design-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .design-preview {
+        height: 300px;
+        position: relative;
+        overflow: hidden;
+        background: #f0f2f5;
+      }
+
+      .design-preview iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        transform: scale(0.7);
+        transform-origin: top left;
+        width: 142.857%;
+        height: 142.857%;
+      }
+
+      .design-info {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .design-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #2d3748;
+      }
+      .design-subtitle {
+        color: #667eea;
+        font-weight: 500;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
+      .design-description {
+        color: #4a5568;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .design-info h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      .design-text {
+        color: #4a5568;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .pros-cons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .pros,
+      .cons {
+        padding: 15px;
+        border-radius: 8px;
+      }
+      .pros {
+        background-color: rgba(56, 161, 105, 0.1);
+      }
+      .cons {
+        background-color: rgba(229, 62, 62, 0.1);
+      }
+      .pros-cons h5 {
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+      }
+      .pros h5 {
+        color: #2f855a;
+      }
+      .cons h5 {
+        color: #c53030;
+      }
+      .pros-cons ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      .pros-cons li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #4a5568;
+      }
+      .pros li::before {
+        content: "+";
+        position: absolute;
+        left: 0;
+        color: #2f855a;
+        font-weight: bold;
+      }
+      .cons li::before {
+        content: "-";
+        position: absolute;
+        left: 0;
+        color: #c53030;
+        font-weight: bold;
+      }
+
+      /* --- NOUVEAUX STYLES POUR FONCTIONNALITÉS & INSPIRATIONS --- */
+      .features-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 15px;
+      }
+      .features-list li {
+        position: relative;
+        padding-left: 25px; /* Espace pour la coche */
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #4a5568;
+      }
+      .features-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #38a169; /* Vert */
+        font-weight: bold;
+        font-size: 1.1em;
+        top: -1px;
+      }
+      /* --- FIN DES NOUVEAUX STYLES --- */
+
+      .specs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+      .spec-title {
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+        color: #4a5568;
+      }
+      .spec-list {
+        list-style: none;
+        padding: 0;
+      }
+      .spec-list li {
+        position: relative;
+        padding-left: 15px;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #4a5568;
+      }
+      .spec-list li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: #667eea;
+        font-weight: bold;
+      }
+      .color-palette {
+        display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+      }
+      .color-swatch {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+
+      .view-full-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: auto;
+      }
+      .view-full-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+      }
+          .recommendation {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .recommendation h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .recommendation p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+      }
+      .modal-content {
+        position: relative;
+        margin: 2% auto;
+        width: 95%;
+        height: 95%;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .modal iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .close {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+        background: rgba(0, 0, 0, 0.5);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+        /* Footer */
+        .presentation-footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--secondary);
+        }
+      
+
+/* Responsive */
+        @media (max-width: 1024px) {
+            .concept-content {
+                grid-template-columns: 1fr;
+            }
+
+            .concept-specs {
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .presentation-container {
+                padding: 1rem;
+            }
+
+            .concepts-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .presentation-title {
+                font-size: 2rem;
+            }
+        }
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+        .designs-section {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 480px) {
+        .pros-cons {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="presentation-container">
+        <header class="presentation-header">
+            <h1 class="presentation-title">Propositions Design</h1>
+            <p class="presentation-subtitle">3 concepts sur mesure pour votre portfolio de storyteller, inspirés de vos références et de votre univers créatif</p>
+            
+            <div class="client-brief">
+                <h3>Brief Client</h3>
+                <p><strong>Profil :</strong> Storyteller & critique parisien, amateur de cinéma et analyste culturel</p>
+                <p><strong>Références :</strong> hannahshelley.neocities.org (listing élégant), adrienscholaert.fr, alvinschang.com</p>
+                <p><strong>Univers :</strong> Sophistication parisienne, passion pour Prince, écriture incisive et cultivée</p>
+                <p><strong>Contenu :</strong> Articles longs, critiques cinéma, analyses culturelles (2003-2023)</p>
+            </div>
+        </header>
+
+      <section class="intro-section">
+        <h2>Analyse et Concepts</h2>
+        <p style="margin-bottom: 30px; color: #4a5568; line-height: 1.6;">
+                Basé sur votre sélection de sites web (adrienscholaert.fr, alvinschang.com, hannahshelley.neocities.org, etc.) 
+                et votre passion pour Prince, j'ai identifié vos préférences esthétiques :
+            </p>
+            
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <h3>Esthétique rétro/vintage</h3>
+                    <ul>
+                        <li>Web artisanal années 90-2000</li>
+                        <li>Nostalgie du "web personnel"</li>
+                        <li>Authenticité vs uniformisation</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h3>Minimalisme radical</h3>
+                    <ul>
+                        <li>Beaucoup d'espace blanc</li>
+                        <li>Pas de fioritures inutiles</li>
+                        <li>Focus sur le contenu</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h3>Layout préféré</h3>
+                    <ul>
+                        <li>Format liste (pas tableau)</li>
+                        <li>Navigation simple</li>
+                        <li>Structure claire et lisible</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h3>Influence Prince</h3>
+                    <ul>
+                        <li>Esthétique mystique</li>
+                        <li>Couleurs profondes</li>
+                        <li>Contrôle total de l'image</li>
+                    </ul>
+                </div>
+            </div>
+      </section>
+
+      <section class="designs-section">
+        <!-- Concept 1 -->
+        <div class="design-card" onclick="openModal('concept-1')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-1-minimalisteParisien.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Minimaliste Parisien</h3>
+            <p class="design-subtitle">L'élégance dans la simplicité</p>
+            <p class="design-description">
+              Inspiré de vos références sophistiquées, ce concept privilégie la
+              lisibilité et l'élégance. L'approche minimaliste met vos textes au
+              centre, avec une typographie soignée qui reflète votre culture
+              parisienne.
+            </p>
+
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+              Navigation claire, grille classique, focus sur la lecture. Le
+              design s'efface devant le contenu, comme dans les meilleures
+              publications littéraires. Parfait pour un storyteller qui
+              privilégie la substance.
+            </p>
+
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+              Vos écrits sont sophistiqués et méritent un écrin à leur hauteur.
+              Ce design respecte vos 20 ans d'archives tout en offrant une
+              modernité discrète. L'accent violet rend hommage à Prince sans
+              ostentation.
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Navigation fixe</li>
+              <li>Grille articles responsive</li>
+              <li>Catégorisation</li>
+              <li>Pagination</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li>Presse parisienne haut de gamme</li>
+              <li>Publications littéraires</li>
+              <li>Blogs culturels premium</li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Très lisible</li>
+                  <li>Chargement rapide</li>
+                  <li>Professionnel</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Peut sembler "classique"</li>
+                  <li>Moins distinctif</li>
+                  <li>Impact visuel limité</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres : Playfair Display</li>
+                  <li>Texte : IBM Plex Mono</li>
+                  <li>Accent : Sophistication</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #1a1a1a"></div>
+                  <div class="color-swatch" style="background: #6b46c1"></div>
+                  <div class="color-swatch" style="background: #fafafa"></div>
+                  <div class="color-swatch" style="background: #666"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-1')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 2 -->
+        <div class="design-card" onclick="openModal('concept-2')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-2-archiveSophistiquee.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Archive Sophistiquée</h3>
+            <p class="design-subtitle">Le listing réinventé</p>
+            <p class="design-description">
+              Directement inspiré de votre référence favorite
+              (hannahshelley.neocities.org), ce concept transforme le listing en
+              expérience sophistiquée. Chaque article devient une entrée
+              d'archive précieuse, avec une recherche intégrée.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+              Format chronologique avec métadonnées riches, tags, extraits.
+              Idéal pour vos 20 ans d'archives. La recherche permet de naviguer
+              dans votre corpus comme dans une bibliothèque personnelle.
+            </p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+              Respecte exactement vos goûts (listing mais sophistiqué) tout en
+              valorisant l'ampleur de votre travail. L'aspect "archives" colle
+              parfaitement à votre statut d'observateur culturel de long terme.
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Recherche full-text</li>
+              <li>Tri par date/catégorie</li>
+              <li>Tags interactifs</li>
+              <li>Statistiques</li>
+              <li>Archive complète</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li>Hannah Shelley (votre référence)</li>
+              <li>Archives numériques</li>
+              <li>Bases de données culturelles</li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Correspond à vos références</li>
+                  <li>Valorise les archives</li>
+                  <li>Recherche intégrée</li>
+                  <li>Navigation chronologique</li>
+                  <li>Scaling excellent</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Moins visuel</li>
+                  <li>Approche très textuelle</li>
+                  <li>Peut sembler austère</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres : Crimson Text</li>
+                  <li>Texte : JetBrains Mono</li>
+                  <li>Accent : Modernité technique</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #0a0a0a"></div>
+                  <div class="color-swatch" style="background: #7c3aed"></div>
+                  <div class="color-swatch" style="background: #fafafa"></div>
+                  <div class="color-swatch" style="background: #737373"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-2')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- J'ai ajouté les sections aux 13 cartes avec du contenu adapté -->
+
+        <!-- Concept 3 -->
+        <div class="design-card" onclick="openModal('concept-3')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-3-purpleRain.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Purple Rain</h3>
+            <p class="design-subtitle">Hommage à l'Artiste</p>
+            <p class="design-description">
+              Un hommage assumé à votre passion pour Prince. Design audacieux
+              avec dégradés violets, animations subtiles, et une esthétique
+              moderne qui fait écho à l'innovation artistique de l'Artist.
+              Parfait pour un storyteller qui n'a pas peur de se démarquer.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+              Interface immersive avec effets visuels soignés, typography
+              expressive, et une navigation fluide. Le design devient partie
+              intégrante de votre storytelling, créant une expérience mémorable
+              qui colle à votre personnalité créative.
+            </p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+              Parce que votre passion pour Prince mérite d'être assumée ! Ce
+              design vous distingue immédiatement, crée une identité visuelle
+              forte, et montre que vous n'avez pas peur de l'audace créative.
+              Parfait pour un storyteller qui marque les esprits.
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Animations CSS avancées</li>
+              <li>Effets de parallaxe</li>
+              <li>Transitions fluides</li>
+              <li>Mode sombre natif</li>
+              <li>Design immersif</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li>Purple Rain (évidemment !)</li>
+              <li>Esthétique musicale moderne</li>
+              <li>Portfolios créatifs premium</li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Identité visuelle unique</li>
+                  <li>Mémorable</li>
+                  <li>Exprime votre personnalité</li>
+                  <li>Design moderne</li>
+                  <li>Impact émotionnel</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Plus polarisant</li>
+                  <li>Peut lasser à long terme</li>
+                  <li>Risque de démodé</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres : Playfair Display</li>
+                  <li>Texte : Space Mono</li>
+                  <li>Accent : Expressivité</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #4c1d95"></div>
+                  <div class="color-swatch" style="background: #8b5cf6"></div>
+                  <div class="color-swatch" style="background: #c4b5fd"></div>
+                  <div class="color-swatch" style="background: #0f0f23"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-3')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 4 -->
+        <div class="design-card" onclick="openModal('concept-4')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-4-brutalistMinimaliste.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Brutaliste Minimaliste</h3>
+            <p class="design-subtitle">Clean, moderne avec une âme</p>
+            <p class="design-description">
+              Approche contemporaine qui met le contenu en avant. Design épuré
+              mais pas froid, avec des touches de violet Prince et des
+              interactions subtiles qui reflètent votre personnalité critique et
+              directe.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text"></p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text"></p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Typography moderne (Inter + JetBrains Mono)</li>
+              <li>Curseur personnalisé interactif</li>
+              <li>Animations micro-interactions</li>
+              <li>Excellent pour le référencement</li>
+              <li>Chargement ultra-rapide</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Professionnel et intemporel</li>
+                  <li>Met en valeur vos textes</li>
+                  <li>Excellent référencement</li>
+                  <li>Facilement évolutif</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Peut sembler "classique"</li>
+                  <li>Moins de personnalité visuelle</li>
+                  <li>Commun dans le milieu marketing</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #000000"></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #ffffff; border: 1px solid #ddd"
+                  ></div>
+                  <div class="color-swatch" style="background: #0000ff"></div>
+                  <div class="color-swatch" style="background: #cccccc"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-4')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 5 -->
+        <div class="design-card" onclick="openModal('concept-5')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-5-neocitiesNostalgique.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">NeoCities Nostalgique</h3>
+            <p class="design-subtitle">Web vintage, esprit rebelle</p>
+            <p class="design-description">
+              Directement inspiré de votre site préféré
+              (hannahshelley.neocities.org). Esthétique web des années 90/2000
+              avec néons, animations et un côté décalé qui colle parfaitement à
+              votre personnalité anti-conformiste.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text"></p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text"></p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Esthétique neocities authentique</li>
+              <li>Effets néons et animations nostalgiques</li>
+              <li>Hommage intégré à Prince</li>
+              <li>Compteur de visiteurs vintage</li>
+              <li>Personnalité ultra-marquée</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Unique et mémorable</li>
+                  <li>Correspond à vos goûts</li>
+                  <li>Anti-conformiste assumé</li>
+                  <li>Storytelling visuel fort</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Peut rebuter certains clients</li>
+                  <li>Lisibilité parfois difficile</li>
+                  <li>Niche très spécifique</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #c0c0c0"></div>
+                  <div class="color-swatch" style="background: #000080"></div>
+                  <div class="color-swatch" style="background: #ffff00"></div>
+                  <div class="color-swatch" style="background: #00ff00"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-5')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 6 -->
+        <div class="design-card" onclick="openModal('concept-6')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-6-modernEditorial.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Modern Éditorial</h3>
+            <p class="design-subtitle">Magazine haut de gamme</p>
+            <p class="design-description">
+              Approche éditoriale raffinée qui met en valeur votre expertise
+              critique. Typography élégante, mise en page magazine avec des
+              touches violettes subtiles. Parfait équilibre entre
+              professionnalisme et personnalité.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text"></p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text"></p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Typography Playfair Display premium</li>
+              <li>Mise en page magazine</li>
+              <li>Grain texture subtile</li>
+              <li>Gradients Prince discrets</li>
+              <li>Lecture optimisée</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Élégant et sophistiqué</li>
+                  <li>Excellent pour la lecture</li>
+                  <li>Crédibilité maximum</li>
+                  <li>Vieillit bien avec le temps</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Peut sembler "safe"</li>
+                  <li>Moins de caractère</li>
+                  <li>Références Prince discrètes</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #1a202c"></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #ffffff; border: 1px solid #ddd"
+                  ></div>
+                  <div class="color-swatch" style="background: #a0aec0"></div>
+                  <div class="color-swatch" style="background: #ed8936"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-6')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 7 -->
+        <div class="design-card" onclick="openModal('concept-7')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-7-purpleRain2.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Purple Rain II</h3>
+            <p class="design-subtitle">Hommage à Prince</p>
+            <p class="design-description">
+              Un design qui capture l'essence mystique de Prince avec des
+              violets profonds et des effets de glow subtils. Parfait pour un
+              storyteller qui veut une identité forte et mémorable.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text"></p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text"></p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Palette inspirée de l'univers Prince</li>
+              <li>Effets lumineux subtils</li>
+              <li>Ambiance premium et mystique</li>
+              <li>Typography monospace vintage</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div
+                    class="color-swatch"
+                    style="background: #9932cc"
+                    title="Violet principal"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #2a0845"
+                    title="Arrière-plan foncé"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #e6e6fa"
+                    title="Texte principal"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #dda0dd"
+                    title="Accents"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-7')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 8 -->
+        <div class="design-card" onclick="openModal('concept-8')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-8-Terminal Vintage.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Terminal Vintage</h3>
+            <p class="design-subtitle">Nostalgie années 90</p>
+            <p class="design-description">
+              Plongée totale dans l'esthétique terminal/hacker des années 90.
+              Avec effet CRT et lignes de balayage pour une authenticité
+              maximale.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text"></p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text"></p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Effet CRT authentique</li>
+              <li>Interface type terminal</li>
+              <li>Nostalgie pure web vintage</li>
+              <li>Esthétique hacker/geek</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div
+                    class="color-swatch"
+                    style="background: #00ff00"
+                    title="Vert terminal"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #000000"
+                    title="Noir absolu"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #ffffff"
+                    title="Blanc pur"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #333333"
+                    title="Gris foncé"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-8')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 9 -->
+        <div class="design-card" onclick="openModal('concept-9')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-9-brutalistMinimal2.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Brutaliste Minimaliste II</h3>
+            <p class="design-subtitle">Ultra épuré</p>
+            <p class="design-description">
+              Minimalisme radical avec un contraste noir/blanc maximal. Pour un
+              puriste qui veut laisser le contenu parler sans distraction.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text"></p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text"></p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Contraste maximum</li>
+              <li>Typographie impeccable</li>
+              <li>Radicalité minimaliste</li>
+              <li>Intemporel et impactant</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                  <li>Élégant et sophistiqué</li>
+                  <li>Excellent pour la lecture</li>
+                  <li>Crédibilité maximum</li>
+                  <li>Vieillit bien avec le temps</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li>Peut sembler "safe"</li>
+                  <li>Moins de caractère</li>
+                  <li>Références Prince discrètes</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div
+                    class="color-swatch"
+                    style="background: #000000"
+                    title="Noir pur"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #ffffff; border: 1px solid #ccc"
+                    title="Blanc pur"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #666666"
+                    title="Gris moyen"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #999999"
+                    title="Gris clair"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-9')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 10 -->
+        <div class="design-card" onclick="openModal('concept-10')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-10-brutalisteModerne.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Brutaliste Moderne</h3>
+            <p class="design-subtitle">Concept 10</p>
+            <p class="design-description">
+              Ambiance : Transgressive et sans concession, parfaitement dans l'esprit du texte
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+             
+            </p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+              <!-- Anti-conformisme : "Je déteste l'unanimité" → Design qui sort du lot
+Authenticité : Police Courier (machine à écrire) = écriture brute
+Sans concession : Couleurs franches (noir/rouge/jaune), pas d'édulcorant
+Personnalité forte : Manifesto, statistiques ironiques ("0 concessions")
+Référence Prince : Esprit rebelle et transgression assumée -->
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+                <!-- Style : Brutalisme digital, éléments géométriques forts
+Ton : Direct, sans filtre, assumé -->
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+                <!-- L'authenticité brute, anti-conformisme -->
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+                    <!-- Typographie Courier, éléments graphiques forts, manifesto -->
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :Courier New</li>
+                  <li>Texte :Times (texte si besoin de lisibilité)</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #FF0000"></div>
+                  <div class="color-swatch" style="background: #000"></div>
+                  <div class="color-swatch" style="background: #FFF"></div>
+                  <div class="color-swatch" style="background: #FFFF00"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-10')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 11 -->
+        <div class="design-card" onclick="openModal('concept-11')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-11-retroTerminal.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Rétro Terminal</h3>
+            <p class="design-subtitle">Quand le cinéphile rencontre la culture geek </p>
+            <p class="design-description">
+              Concept "Matrix Storyteller".
+Un design qui évoque l'univers des hackers et programmeurs des années 90, parfait pour un storyteller passionné de technologie et de cinéma. L'esthétique terminal/console fait écho à l'aspect technique du métier de critique.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+              
+            </p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+              
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Typographie monospace (JetBrains Mono)</li>
+              <li>Palette vert Matrix + orange accent</li>
+              <li>Interface ligne de commande simulée</li>
+              <li>Animations de curseur clignotant</li>
+              <li>Cards avec effet néon au hover</li>
+<!-- 
+              <li>Esthétique de terminal informatique années 80/90</li>
+              <li>Couleurs vert Matrix sur fond sombre</li>
+              <li>Interface façon ligne de commande</li>
+              <li>Parfait pour l'aspect geek et cinéphile</li> -->
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+               <li>Très original et mémorable</li>
+                                    <li>Cohérent avec l'univers cinéma</li>
+                                    <li>Parfait pour se démarquer</li>
+                                    <li>Animations engageantes</li>
+                                    <li>Cible geek/culture pop</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+             <li>Peut paraître trop technique</li>
+                                    <li>Lisibilité à long terme</li>
+                                    <li>Moins adapté mobile</li>
+                                    <li>Style très spécifique</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :monospace (JetBrains Mono)</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #00ff41"></div>
+                  <div class="color-swatch" style="background: #ff6b35"></div>
+                  <div class="color-swatch" style="background: #0d1117"></div>
+                  <div class="color-swatch" style="background: #c9d1d9"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-11')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 12 -->
+        <div class="design-card" onclick="openModal('concept-12')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-12-purpleRain3.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Purple Rain III</h3>
+            <p class="design-subtitle">Concept "Prince Elegance"</p>
+            <p class="design-description">
+              Inspiré par l'esthétique de Prince, ce design combine élégance minimaliste et couleurs signature (violet/rose). 
+                                Perfect pour un storyteller sophistiqué qui aime les références culturelles fortes.
+            </p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+            
+            </p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+             
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Typographie Crimson Text (titres) + Inter (texte)</li>
+              <li>Design épuré et élégant</li>
+              <li>Typography mixte (Inter + Crimson Text)</li>
+              <li>Format liste clean comme Hannah Shelley</li>
+              <li>Quote de Prince intégrée</li>
+              <li>Animations subtiles et raffinées</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+               <li>Référence culturelle forte</li>
+                                    <li>Élégant et sophistiqué</li>
+                                    <li>Couleurs distinctives</li>
+                                    <li>Parfait équilibre contenu/design</li>
+                                    <li>Responsive et accessible</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+            <li>Référence peut ne pas parler à tous</li>
+                                    <li>Violet peut lasser</li>
+                                    <li>Style assez genré masculin</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :Crimson Text (titres)</li>
+                  <li>Texte :Inter (texte)</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #663399"></div>
+                  <div class="color-swatch" style="background: #9966cc"></div>
+                  <div class="color-swatch" style="background: #ff6b9d"></div>
+                  <div class="color-swatch" style="background: #fafafa"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-12')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+
+        <!-- Concept 13 -->
+        <div class="design-card" onclick="openModal('concept-13')">
+          <div class="design-preview">
+            <iframe
+              src="DB-PROPOSITIONS/concept-13-brutalistMinimal.html"
+              scrolling="no"
+            ></iframe>
+          </div>
+          <div class="design-info">
+            <h3 class="design-title">Brutaliste Minimal</h3>
+            <p class="design-subtitle">L'essence pure du storytelling</p>
+            <p class="design-description">
+              Directement inspiré de Hannah Shelley Neocities, ce design privilégie la lisibilité absolue et l'efficacité. 
+                                Zero distraction, focus total sur le contenu et les mots. L'anti-design par excellence.
+            Volontairement restrictive pour un impact maximal et une lisibilité absolue</p>
+            <h4>Expérience utilisateur</h4>
+            <p class="design-text">
+             
+            </p>
+            <h4>Pourquoi ce choix</h4>
+            <p class="design-text">
+           
+            </p>
+
+            <h4>Fonctionnalités</h4>
+            <ul class="features-list">
+              <li>Times New Roman exclusif (web-safe)</li>
+              <li>Mise en page brutalist minimaliste</li>
+              <li>Aucune animation ou effet visuel</li>
+              <li>Mise en page brutalist</li>
+              <li>Focus total sur le contenu</li>
+            </ul>
+
+            <h4>Inspiration</h4>
+            <ul class="features-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Points forts</h5>
+                <ul>
+               <li>Totalement intemporel</li>
+                                    <li>Focus absolu sur le contenu</li>
+                                    <li>Ultra-rapide et léger</li>
+                                    <li>Très proche de ses références</li>
+                                    <li>Lisibilité parfaite</li>
+                                    <li>SEO optimal</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>Points faibles</h5>
+                <ul>
+           <li>Peut paraître trop austère</li>
+                                    <li>Peu différenciant visuellement</li>
+                                    <li>Manque de personnalité</li>
+                                    <li>Pas d'effet "wow"</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="specs-container">
+              <div class="spec-group">
+                <div class="spec-title">Typographie / Caractéristiques</div>
+                <ul class="spec-list">
+                  <li>Titres :</li>
+                  <li>Texte :</li>
+                  <li>Accent :</li>
+                </ul>
+              </div>
+              <div class="spec-group">
+                <div class="spec-title">Palette Couleurs</div>
+                <div class="color-palette">
+                  <div class="color-swatch" style="background: #000000"></div>
+                  <div
+                    class="color-swatch"
+                    style="background: #ffffff; border: 1px solid #ddd"
+                  ></div>
+                  <div class="color-swatch" style="background: #cccccc"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-full-btn"
+              onclick="event.stopPropagation(); openModal('concept-13')"
+            >
+              Voir en plein écran
+            </button>
+          </div>
+        </div>
+        <!-- Reste des cartes... -->
+        <div id="remaining-cards-placeholder">
+          <!-- Les cartes 4 à 13 suivraient exactement la même structure HTML, avec le contenu adapté à chaque concept. -->
+        </div>
+      </section>
+    <!-- Recommendation -->
+      <div class="recommendation">
+        <h3>Recommandation</h3>
+        <p>
+          Pour votre profil de storyteller sophistiqué, je recommande le
+          <strong>Concept 2 - Archive Sophistiquée</strong>. Il respecte
+          parfaitement vos références, valorise vos 20 ans d'écriture, et offre
+          l'expérience de navigation élégante que vous recherchez. Un choix sûr
+          qui grandit avec votre contenu.
+        </p>
+        <br />
+        <p>
+          <em
+            >Le Concept 3 serait mon coup de cœur si vous voulez vraiment vous
+            démarquer et assumer votre univers Prince !</em
+          >
+        </p>
+        <p>
+          <em
+            >Après analyse de votre profil et de vos références, je recommande
+            fortement la Version 5 • Neocities Nostalgique. Elle correspond
+            parfaitement à votre personnalité, vos goûts esthétiques et votre
+            positionnement anti-conformiste. C'est audacieux, mémorable et
+            authentiquement vous.</em
+          >
+        </p>
+        <p>
+          <em
+            ><strong>Design 7 "Purple Rain"</strong> - Ce design honore
+            parfaitement votre passion pour Prince tout en conservant l'esprit
+            rétro et minimaliste que vous recherchez. Il crée une identité forte
+            et mémorable, rare dans l'univers du marketing digital. C'est le
+            parfait équilibre entre authenticité vintage et professionnalisme
+            moderne pour un storyteller qui veut se démarquer.</em
+          >
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <footer class="presentation-footer">
+        <p>
+          Présentation créée spécialement pour David B. • Prêt pour validation
+          et développement
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.9rem">
+          Chaque concept peut être personnalisé selon vos retours
+        </p>
+      </footer>
+    </div>
+
+    <!-- Modals et Script restent inchangés -->
+
+    <!-- Modals -->
+    <div id="modal-concept-1" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-1')">&times;</span
+        ><iframe id="iframe-concept-1"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-2" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-2')">&times;</span
+        ><iframe id="iframe-concept-2"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-3" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-3')">&times;</span
+        ><iframe id="iframe-concept-3"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-4" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-4')">&times;</span
+        ><iframe id="iframe-concept-4"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-5" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-5')">&times;</span
+        ><iframe id="iframe-concept-5"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-6" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-6')">&times;</span
+        ><iframe id="iframe-concept-6"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-7" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-7')">&times;</span
+        ><iframe id="iframe-concept-7"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-8" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-8')">&times;</span
+        ><iframe id="iframe-concept-8"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-9" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-9')">&times;</span
+        ><iframe id="iframe-concept-9"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-10" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-10')">&times;</span
+        ><iframe id="iframe-concept-10"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-11" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-11')">&times;</span
+        ><iframe id="iframe-concept-11"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-12" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-12')">&times;</span
+        ><iframe id="iframe-concept-12"></iframe>
+      </div>
+    </div>
+    <div id="modal-concept-13" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('concept-13')">&times;</span
+        ><iframe id="iframe-concept-13"></iframe>
+      </div>
+    </div>
+
+    <script>
+      const conceptFiles = {
+        "concept-1": "DB-PROPOSITIONS/concept-1-minimalisteParisien.html",
+        "concept-2": "DB-PROPOSITIONS/concept-2-archiveSophistiquee.html",
+        "concept-3": "DB-PROPOSITIONS/concept-3-purpleRain.html",
+        "concept-4": "DB-PROPOSITIONS/concept-4-brutalistMinimaliste.html",
+        "concept-5": "DB-PROPOSITIONS/concept-5-neocitiesNostalgique.html",
+        "concept-6": "DB-PROPOSITIONS/concept-6-modernEditorial.html",
+        "concept-7": "DB-PROPOSITIONS/concept-7-purpleRain2.html",
+        "concept-8": "DB-PROPOSITIONS/concept-8-Terminal Vintage.html",
+        "concept-9": "DB-PROPOSITIONS/concept-9-brutalistMinimal2.html",
+        "concept-10": "DB-PROPOSITIONS/concept-10-brutalisteModerne.html",
+        "concept-11": "DB-PROPOSITIONS/concept-11-retroTerminal.html",
+        "concept-12": "DB-PROPOSITIONS/concept-12-purpleRain3.html",
+        "concept-13": "DB-PROPOSITIONS/concept-13-brutalistMinimal.html",
+      };
+      function openModal(designType) {
+        const modal = document.getElementById(`modal-${designType}`),
+          iframe = document.getElementById(`iframe-${designType}`),
+          filePath = conceptFiles[designType];
+        filePath
+          ? (iframe.src = filePath)
+          : console.error("Fichier de concept non trouvé pour :", designType);
+        (modal.style.display = "block"),
+          (document.body.style.overflow = "hidden");
+      }
+      function closeModal(designType) {
+        const modal = document.getElementById(`modal-${designType}`),
+          iframe = document.getElementById(`iframe-${designType}`);
+        (modal.style.display = "none"),
+          (document.body.style.overflow = "auto"),
+          (iframe.src = "about:blank");
+      }
+      window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) {
+          const modalId = event.target.id,
+            designType = modalId.replace("modal-", "");
+          closeModal(designType);
+        }
+      };
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              (entry.target.style.opacity = "1"),
+                (entry.target.style.transform = "translateY(0)");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".design-card");
+        cards.forEach((card) => {
+          (card.style.opacity = "0"),
+            (card.style.transform = "translateY(20px)"),
+            (card.style.transition = "opacity 0.6s ease, transform 0.6s ease"),
+            observer.observe(card);
+        });
+      });
+    </script>
+  </body>
+</html>
