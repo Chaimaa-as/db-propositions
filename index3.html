@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Story Teller - 13 Propositions de Design</title>
+    <title>Story Teller - Propositions de Design</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap");
 
@@ -23,7 +23,7 @@
         }
       body {
         font-family: "Inter", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-light);
         min-height: 100vh;
         color: #333;
         line-height: 1.6;
@@ -106,6 +106,7 @@
         font-size: 2rem;
         margin-bottom: 25px;
         color: #2d3748;
+        font-family: playfair display, serif;
       }
 
       .analysis-grid {
@@ -119,11 +120,11 @@
             background: #f8fafc;
             padding: 25px;
             border-radius: 15px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--accent);
         }
         
         .analysis-item h3 {
-            color: #667eea;
+            color: var(--primary);
             margin-bottom: 15px;
             font-size: 1.1rem;
             font-weight: 600;
@@ -229,7 +230,7 @@
 
       .pros-cons {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        /* grid-template-columns: 1fr 1fr; */
         gap: 15px;
         margin-top: 20px;
       }
@@ -493,7 +494,7 @@
     <div class="presentation-container">
         <header class="presentation-header">
             <h1 class="presentation-title">Propositions Design</h1>
-            <p class="presentation-subtitle">3 concepts sur mesure pour votre portfolio de storyteller, inspirés de vos références et de votre univers créatif</p>
+            <p class="presentation-subtitle">concepts sur mesure pour votre portfolio de storyteller, inspirés de vos références et de votre univers créatif</p>
             
             <div class="client-brief">
                 <h3>Brief Client</h3>
@@ -551,8 +552,8 @@
       </section>
 
       <section class="designs-section">
-        <!-- Concept 1 -->
-        <div class="design-card" onclick="openModal('concept-1')">
+        <!-- Concept 1 OK-->
+        <!-- <div class="design-card" onclick="openModal('concept-1')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-1-minimalisteParisien.html"
@@ -563,26 +564,9 @@
             <h3 class="design-title">Minimaliste Parisien</h3>
             <p class="design-subtitle">L'élégance dans la simplicité</p>
             <p class="design-description">
-              Inspiré de vos références sophistiquées, ce concept privilégie la
-              lisibilité et l'élégance. L'approche minimaliste met vos textes au
-              centre, avec une typographie soignée qui reflète votre culture
-              parisienne.
-            </p>
-
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-              Navigation claire, grille classique, focus sur la lecture. Le
-              design s'efface devant le contenu, comme dans les meilleures
-              publications littéraires. Parfait pour un storyteller qui
-              privilégie la substance.
-            </p>
-
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-              Vos écrits sont sophistiqués et méritent un écrin à leur hauteur.
-              Ce design respecte vos 20 ans d'archives tout en offrant une
-              modernité discrète. L'accent violet rend hommage à Prince sans
-              ostentation.
+              L'approche minimaliste met les textes au
+              centre, tout en offrant une modernité discrète. L'accent violet rend hommage à Prince sans
+              ostentation. Inspiration : Presse parisienne haut de gamme, Publications littéraires, Blogs culturels premium
             </p>
 
             <h4>Fonctionnalités</h4>
@@ -591,13 +575,6 @@
               <li>Grille articles responsive</li>
               <li>Catégorisation</li>
               <li>Pagination</li>
-            </ul>
-
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li>Presse parisienne haut de gamme</li>
-              <li>Publications littéraires</li>
-              <li>Blogs culturels premium</li>
             </ul>
 
             <div class="pros-cons">
@@ -625,7 +602,6 @@
                 <ul class="spec-list">
                   <li>Titres : Playfair Display</li>
                   <li>Texte : IBM Plex Mono</li>
-                  <li>Accent : Sophistication</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -646,9 +622,9 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 2 -->
+        <!-- Concept 2 OK mais manque bas de page-->
         <div class="design-card" onclick="openModal('concept-2')">
           <div class="design-preview">
             <iframe
@@ -660,45 +636,28 @@
             <h3 class="design-title">Archive Sophistiquée</h3>
             <p class="design-subtitle">Le listing réinventé</p>
             <p class="design-description">
-              Directement inspiré de votre référence favorite
-              (hannahshelley.neocities.org), ce concept transforme le listing en
-              expérience sophistiquée. Chaque article devient une entrée
-              d'archive précieuse, avec une recherche intégrée.
-            </p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-              Format chronologique avec métadonnées riches, tags, extraits.
-              Idéal pour vos 20 ans d'archives. La recherche permet de naviguer
+              Idéal pour 20 ans d'archives. La recherche permet de naviguer
               dans votre corpus comme dans une bibliothèque personnelle.
+              Respecte tes goûts (listing mais sophistiqué) tout en
+              valorisant l'ampleur de ton travail. L'aspect "archives" colle
+              parfaitement à ton statut d'observateur culturel de long terme.
+              Inspiration : Hannah Shelley, Archives numériques, Bases de données culturelles.
             </p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-              Respecte exactement vos goûts (listing mais sophistiqué) tout en
-              valorisant l'ampleur de votre travail. L'aspect "archives" colle
-              parfaitement à votre statut d'observateur culturel de long terme.
-            </p>
+    
 
             <h4>Fonctionnalités</h4>
             <ul class="features-list">
+              <li>Format chronologique avec métadonnées riches, tags, extraits.</li>
               <li>Recherche full-text</li>
               <li>Tri par date/catégorie</li>
               <li>Tags interactifs</li>
               <li>Statistiques</li>
-              <li>Archive complète</li>
-            </ul>
-
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li>Hannah Shelley (votre référence)</li>
-              <li>Archives numériques</li>
-              <li>Bases de données culturelles</li>
             </ul>
 
             <div class="pros-cons">
               <div class="pros">
                 <h5>Points forts</h5>
                 <ul>
-                  <li>Correspond à vos références</li>
                   <li>Valorise les archives</li>
                   <li>Recherche intégrée</li>
                   <li>Navigation chronologique</li>
@@ -721,7 +680,6 @@
                 <ul class="spec-list">
                   <li>Titres : Crimson Text</li>
                   <li>Texte : JetBrains Mono</li>
-                  <li>Accent : Modernité technique</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -744,10 +702,8 @@
           </div>
         </div>
 
-        <!-- J'ai ajouté les sections aux 13 cartes avec du contenu adapté -->
-
         <!-- Concept 3 -->
-        <div class="design-card" onclick="openModal('concept-3')">
+        <!-- <div class="design-card" onclick="openModal('concept-3')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-3-purpleRain.html"
@@ -758,24 +714,13 @@
             <h3 class="design-title">Purple Rain</h3>
             <p class="design-subtitle">Hommage à l'Artiste</p>
             <p class="design-description">
-              Un hommage assumé à votre passion pour Prince. Design audacieux
+              Design audacieux
               avec dégradés violets, animations subtiles, et une esthétique
               moderne qui fait écho à l'innovation artistique de l'Artist.
-              Parfait pour un storyteller qui n'a pas peur de se démarquer.
-            </p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-              Interface immersive avec effets visuels soignés, typography
-              expressive, et une navigation fluide. Le design devient partie
-              intégrante de votre storytelling, créant une expérience mémorable
-              qui colle à votre personnalité créative.
-            </p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-              Parce que votre passion pour Prince mérite d'être assumée ! Ce
-              design vous distingue immédiatement, crée une identité visuelle
-              forte, et montre que vous n'avez pas peur de l'audace créative.
+              Ce design te distingue immédiatement, crée une identité visuelle
+              forte, et montre que tu n'as pas peur de l'audace créative.
               Parfait pour un storyteller qui marque les esprits.
+              Inspiration : Purple Rain, Esthétique musicale moderne, Portfolios créatifs.
             </p>
 
             <h4>Fonctionnalités</h4>
@@ -787,20 +732,12 @@
               <li>Design immersif</li>
             </ul>
 
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li>Purple Rain (évidemment !)</li>
-              <li>Esthétique musicale moderne</li>
-              <li>Portfolios créatifs premium</li>
-            </ul>
-
             <div class="pros-cons">
               <div class="pros">
                 <h5>Points forts</h5>
                 <ul>
                   <li>Identité visuelle unique</li>
                   <li>Mémorable</li>
-                  <li>Exprime votre personnalité</li>
                   <li>Design moderne</li>
                   <li>Impact émotionnel</li>
                 </ul>
@@ -810,7 +747,7 @@
                 <ul>
                   <li>Plus polarisant</li>
                   <li>Peut lasser à long terme</li>
-                  <li>Risque de démodé</li>
+                  <li>Risque de se démoder</li>
                 </ul>
               </div>
             </div>
@@ -821,7 +758,6 @@
                 <ul class="spec-list">
                   <li>Titres : Playfair Display</li>
                   <li>Texte : Space Mono</li>
-                  <li>Accent : Expressivité</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -842,10 +778,10 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 4 -->
-        <div class="design-card" onclick="openModal('concept-4')">
+        <!-- Concept 4 KO trop proche du 1 -->
+        <!-- <div class="design-card" onclick="openModal('concept-4')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-4-brutalistMinimaliste.html"
@@ -932,10 +868,10 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 5 -->
-        <div class="design-card" onclick="openModal('concept-5')">
+        <!-- Concept 5 KO trop chargé-->
+        <!-- <div class="design-card" onclick="openModal('concept-5')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-5-neocitiesNostalgique.html"
@@ -1019,9 +955,9 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 6 -->
+        <!-- Concept 6 OK-->
         <div class="design-card" onclick="openModal('concept-6')">
           <div class="design-preview">
             <iframe
@@ -1038,10 +974,6 @@
               touches violettes subtiles. Parfait équilibre entre
               professionnalisme et personnalité.
             </p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text"></p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text"></p>
 
             <h4>Fonctionnalités</h4>
             <ul class="features-list">
@@ -1050,13 +982,6 @@
               <li>Grain texture subtile</li>
               <li>Gradients Prince discrets</li>
               <li>Lecture optimisée</li>
-            </ul>
-
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li></li>
-              <li></li>
-              <li></li>
             </ul>
 
             <div class="pros-cons">
@@ -1083,9 +1008,8 @@
               <div class="spec-group">
                 <div class="spec-title">Typographie / Caractéristiques</div>
                 <ul class="spec-list">
-                  <li>Titres :</li>
-                  <li>Texte :</li>
-                  <li>Accent :</li>
+                  <li>Titres : Playfair Display</li>
+                  <li>Texte : Inter</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -1111,8 +1035,8 @@
           </div>
         </div>
 
-        <!-- Concept 7 -->
-        <div class="design-card" onclick="openModal('concept-7')">
+        <!-- Concept 7 KO trop violet-->
+        <!-- <div class="design-card" onclick="openModal('concept-7')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-7-purpleRain2.html"
@@ -1209,10 +1133,10 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 8 -->
-        <div class="design-card" onclick="openModal('concept-8')">
+        <!-- Concept 8 KO Non adapté (non dev + bcp été vu)-->
+        <!-- <div class="design-card" onclick="openModal('concept-8')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-8-Terminal Vintage.html"
@@ -1309,10 +1233,10 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 9 -->
-        <div class="design-card" onclick="openModal('concept-9')">
+        <!-- Concept 9 KO se rapproche bcp du 13-->
+        <!-- <div class="design-card" onclick="openModal('concept-9')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-9-brutalistMinimal2.html"
@@ -1409,9 +1333,9 @@
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 10 -->
+        <!-- Concept 10 OK s-->
         <div class="design-card" onclick="openModal('concept-10')">
           <div class="design-preview">
             <iframe
@@ -1423,54 +1347,37 @@
             <h3 class="design-title">Brutaliste Moderne</h3>
             <p class="design-subtitle">Concept 10</p>
             <p class="design-description">
-              Ambiance : Transgressive et sans concession, parfaitement dans l'esprit du texte
-            </p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-             
-            </p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-              <!-- Anti-conformisme : "Je déteste l'unanimité" → Design qui sort du lot
-Authenticité : Police Courier (machine à écrire) = écriture brute
-Sans concession : Couleurs franches (noir/rouge/jaune), pas d'édulcorant
-Personnalité forte : Manifesto, statistiques ironiques ("0 concessions")
-Référence Prince : Esprit rebelle et transgression assumée -->
+              Ambiance : Transgressive et sans concession, parfaitement dans l'esprit du texte. Brutalisme digital, éléments géométriques forts
+Ton : Direct, sans filtre, assumé
             </p>
 
             <h4>Fonctionnalités</h4>
             <ul class="features-list">
-                <!-- Style : Brutalisme digital, éléments géométriques forts
-Ton : Direct, sans filtre, assumé -->
-              <li></li>
-              <li></li>
-              <li></li>
+              <li>Anti-conformisme : "Je déteste l'unanimité" → Design qui sort du lot</li>
+              <li>Authenticité : Police Courier (machine à écrire) = écriture brute</li>
+              <li>Sans concession : Couleurs franches (noir/rouge/jaune), pas d'édulcorant</li>
+              <li>Personnalité forte : Manifesto, statistiques ironiques ("0 concessions")</li>
+              <li>Référence Prince : Esprit rebelle et transgression assumée</li>
             </ul>
+     
 
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-                <!-- L'authenticité brute, anti-conformisme -->
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
+
 
             <div class="pros-cons">
               <div class="pros">
                 <h5>Points forts</h5>
                 <ul>
-                    <!-- Typographie Courier, éléments graphiques forts, manifesto -->
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>Design audacieux et mémorable</li>
+                  <li>Utilisation efficace de la couleur</li>
+                  <li>Typographie distinctive</li>
                 </ul>
               </div>
               <div class="cons">
                 <h5>Points faibles</h5>
                 <ul>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>Peut sembler trop agressif pour certains utilisateurs</li>
+                  <li>Lisibilité réduite sur certains écrans</li>
+                  <li>Moins adapté aux contenus longs</li>
                 </ul>
               </div>
             </div>
@@ -1480,8 +1387,7 @@ Ton : Direct, sans filtre, assumé -->
                 <div class="spec-title">Typographie / Caractéristiques</div>
                 <ul class="spec-list">
                   <li>Titres :Courier New</li>
-                  <li>Texte :Times (texte si besoin de lisibilité)</li>
-                  <li>Accent :</li>
+                  <li>Texte : Times (texte si besoin de lisibilité)</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -1504,7 +1410,7 @@ Ton : Direct, sans filtre, assumé -->
           </div>
         </div>
 
-        <!-- Concept 11 -->
+        <!-- Concept 11 ? -->
         <div class="design-card" onclick="openModal('concept-11')">
           <div class="design-preview">
             <iframe
@@ -1519,14 +1425,6 @@ Ton : Direct, sans filtre, assumé -->
               Concept "Matrix Storyteller".
 Un design qui évoque l'univers des hackers et programmeurs des années 90, parfait pour un storyteller passionné de technologie et de cinéma. L'esthétique terminal/console fait écho à l'aspect technique du métier de critique.
             </p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-              
-            </p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-              
-            </p>
 
             <h4>Fonctionnalités</h4>
             <ul class="features-list">
@@ -1535,38 +1433,27 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
               <li>Interface ligne de commande simulée</li>
               <li>Animations de curseur clignotant</li>
               <li>Cards avec effet néon au hover</li>
-<!-- 
-              <li>Esthétique de terminal informatique années 80/90</li>
-              <li>Couleurs vert Matrix sur fond sombre</li>
-              <li>Interface façon ligne de commande</li>
-              <li>Parfait pour l'aspect geek et cinéphile</li> -->
-            </ul>
 
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li></li>
-              <li></li>
-              <li></li>
             </ul>
 
             <div class="pros-cons">
               <div class="pros">
                 <h5>Points forts</h5>
                 <ul>
-               <li>Très original et mémorable</li>
-                                    <li>Cohérent avec l'univers cinéma</li>
-                                    <li>Parfait pour se démarquer</li>
-                                    <li>Animations engageantes</li>
-                                    <li>Cible geek/culture pop</li>
+                  <li>Très original et mémorable</li>
+                  <li>Cohérent avec l'univers cinéma</li>
+                  <li>Parfait pour se démarquer</li>
+                  <li>Animations engageantes</li>
+                  <li>Cible geek/culture pop</li>
                 </ul>
               </div>
               <div class="cons">
                 <h5>Points faibles</h5>
                 <ul>
-             <li>Peut paraître trop technique</li>
-                                    <li>Lisibilité à long terme</li>
-                                    <li>Moins adapté mobile</li>
-                                    <li>Style très spécifique</li>
+                  <li>Peut paraître trop technique</li>
+                  <li>Lisibilité à long terme</li>
+                  <li>Moins adapté mobile</li>
+                  <li>Style très spécifique</li>
                 </ul>
               </div>
             </div>
@@ -1576,8 +1463,7 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
                 <div class="spec-title">Typographie / Caractéristiques</div>
                 <ul class="spec-list">
                   <li>Titres :monospace (JetBrains Mono)</li>
-                  <li>Texte :</li>
-                  <li>Accent :</li>
+                  <li>Texte : IBM Plex Mono</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -1601,7 +1487,7 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
         </div>
 
         <!-- Concept 12 -->
-        <div class="design-card" onclick="openModal('concept-12')">
+        <!-- <div class="design-card" onclick="openModal('concept-12')">
           <div class="design-preview">
             <iframe
               src="DB-PROPOSITIONS/concept-12-purpleRain3.html"
@@ -1609,55 +1495,35 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
             ></iframe>
           </div>
           <div class="design-info">
-            <h3 class="design-title">Purple Rain III</h3>
+            <h3 class="design-title">Purple Rain</h3>
             <p class="design-subtitle">Concept "Prince Elegance"</p>
             <p class="design-description">
               Inspiré par l'esthétique de Prince, ce design combine élégance minimaliste et couleurs signature (violet/rose). 
-                                Perfect pour un storyteller sophistiqué qui aime les références culturelles fortes.
-            </p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-            
-            </p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-             
             </p>
 
             <h4>Fonctionnalités</h4>
             <ul class="features-list">
-              <li>Typographie Crimson Text (titres) + Inter (texte)</li>
               <li>Design épuré et élégant</li>
-              <li>Typography mixte (Inter + Crimson Text)</li>
-              <li>Format liste clean comme Hannah Shelley</li>
-              <li>Quote de Prince intégrée</li>
               <li>Animations subtiles et raffinées</li>
-            </ul>
-
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li></li>
-              <li></li>
-              <li></li>
             </ul>
 
             <div class="pros-cons">
               <div class="pros">
                 <h5>Points forts</h5>
                 <ul>
-               <li>Référence culturelle forte</li>
-                                    <li>Élégant et sophistiqué</li>
-                                    <li>Couleurs distinctives</li>
-                                    <li>Parfait équilibre contenu/design</li>
-                                    <li>Responsive et accessible</li>
+      
+                  <li>Élégant et sophistiqué</li>
+                  <li>Couleurs distinctives</li>
+                  <li>Parfait équilibre contenu/design</li>
+      
                 </ul>
               </div>
               <div class="cons">
                 <h5>Points faibles</h5>
                 <ul>
-            <li>Référence peut ne pas parler à tous</li>
-                                    <li>Violet peut lasser</li>
-                                    <li>Style assez genré masculin</li>
+                  <li>Référence peut ne pas parler à tous</li>
+                  <li>Violet peut lasser</li>
+                  <li>Style assez genré masculin</li>
                 </ul>
               </div>
             </div>
@@ -1668,7 +1534,6 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
                 <ul class="spec-list">
                   <li>Titres :Crimson Text (titres)</li>
                   <li>Texte :Inter (texte)</li>
-                  <li>Accent :</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -1689,9 +1554,9 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
               Voir en plein écran
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Concept 13 -->
+        <!-- Concept 13 ? se rapproche bcp du 9-->
         <div class="design-card" onclick="openModal('concept-13')">
           <div class="design-preview">
             <iframe
@@ -1706,14 +1571,7 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
               Directement inspiré de Hannah Shelley Neocities, ce design privilégie la lisibilité absolue et l'efficacité. 
                                 Zero distraction, focus total sur le contenu et les mots. L'anti-design par excellence.
             Volontairement restrictive pour un impact maximal et une lisibilité absolue</p>
-            <h4>Expérience utilisateur</h4>
-            <p class="design-text">
-             
-            </p>
-            <h4>Pourquoi ce choix</h4>
-            <p class="design-text">
-           
-            </p>
+
 
             <h4>Fonctionnalités</h4>
             <ul class="features-list">
@@ -1724,32 +1582,25 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
               <li>Focus total sur le contenu</li>
             </ul>
 
-            <h4>Inspiration</h4>
-            <ul class="features-list">
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-
             <div class="pros-cons">
               <div class="pros">
                 <h5>Points forts</h5>
                 <ul>
-               <li>Totalement intemporel</li>
-                                    <li>Focus absolu sur le contenu</li>
-                                    <li>Ultra-rapide et léger</li>
-                                    <li>Très proche de ses références</li>
-                                    <li>Lisibilité parfaite</li>
-                                    <li>SEO optimal</li>
+                  <li>Totalement intemporel</li>
+                  <li>Focus absolu sur le contenu</li>
+                  <li>Ultra-rapide et léger</li>
+                  <li>Très proche de ses références</li>
+                  <li>Lisibilité parfaite</li>
+                  <li>SEO optimal</li>
                 </ul>
               </div>
               <div class="cons">
                 <h5>Points faibles</h5>
                 <ul>
-           <li>Peut paraître trop austère</li>
-                                    <li>Peu différenciant visuellement</li>
-                                    <li>Manque de personnalité</li>
-                                    <li>Pas d'effet "wow"</li>
+                  <li>Peut paraître trop austère</li>
+                  <li>Peu différenciant visuellement</li>
+                  <li>Manque de personnalité</li>
+                  <li>Pas d'effet "wow"</li>
                 </ul>
               </div>
             </div>
@@ -1758,9 +1609,8 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
               <div class="spec-group">
                 <div class="spec-title">Typographie / Caractéristiques</div>
                 <ul class="spec-list">
-                  <li>Titres :</li>
-                  <li>Texte :</li>
-                  <li>Accent :</li>
+                  <li>Titres : Times New Roman</li>
+                  <li>Texte : Times New Roman</li>
                 </ul>
               </div>
               <div class="spec-group">
@@ -1789,8 +1639,9 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
           <!-- Les cartes 4 à 13 suivraient exactement la même structure HTML, avec le contenu adapté à chaque concept. -->
         </div>
       </section>
-    <!-- Recommendation -->
-      <div class="recommendation">
+      
+      <!-- Recommendation -->
+      <!-- <div class="recommendation">
         <h3>Recommandation</h3>
         <p>
           Pour votre profil de storyteller sophistiqué, je recommande le
@@ -1825,7 +1676,7 @@ Un design qui évoque l'univers des hackers et programmeurs des années 90, parf
             moderne pour un storyteller qui veut se démarquer.</em
           >
         </p>
-      </div>
+      </div> -->
 
       <!-- Footer -->
       <footer class="presentation-footer">
