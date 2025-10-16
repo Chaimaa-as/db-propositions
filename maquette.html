@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dadaisme.me | David B. - Storyteller & Critique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        /* LAYOUT */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        aside {
+            width: 220px;
+            background-color: #ffffff;
+            padding: 40px 20px;
+            border-right: 1px solid #000;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            left: 0;
+        }
+
+        aside h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        aside .tagline {
+            font-size: 11px;
+            font-style: italic;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        aside nav ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        aside nav ul li {
+            margin-bottom: 12px;
+        }
+
+        aside nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+            display: block;
+            padding: 4px 0;
+        }
+
+        aside nav ul li a:hover {
+            opacity: 0.6;
+        }
+
+        aside nav ul li.submenu {
+            margin-left: 12px;
+            font-size: 12px;
+            font-weight: normal;
+            letter-spacing: 0;
+        }
+
+        aside nav ul li.submenu a {
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #000;
+            margin: 30px 0;
+        }
+
+        .footer-links {
+            font-size: 11px;
+        }
+
+        .footer-links a {
+            color: #000;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 60px 80px;
+            max-width: 900px;
+        }
+
+        /* HOME PAGE */
+        .home-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 40px;
+        }
+
+        .home-header h1 {
+            font-size: 42px;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .home-header p {
+            font-size: 14px;
+            font-style: italic;
+            color: #333;
+        }
+
+        .quote-block {
+            background-color: #f5f5f5;
+            border-left: 3px solid #000;
+            padding: 20px;
+            margin: 40px 0;
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* ARTICLES GRID */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 30px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .article-card:hover {
+            opacity: 0.8;
+        }
+
+        .article-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .article-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #000;
+            text-decoration: none;
+            display: block;
+        }
+
+        .article-excerpt {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* ABOUT PAGE */
+        .about-section {
+            margin-bottom: 50px;
+        }
+
+        .about-section h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .about-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* FORM */
+        .contact-form {
+            max-width: 500px;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            font-family: Arial, sans-serif;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 13px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background-color: #f5f5f5;
+        }
+
+        .btn-submit {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+            padding: 12px 30px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-left: 220px;
+            border-top: 1px solid #000;
+            padding: 40px 80px;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            background-color: #fafafa;
+        }
+
+        /* PAGES (hidden by default) */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* PAGE TITLE */
+        .page-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            aside {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #000;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 40px 20px;
+            }
+
+            footer {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .home-header h1 {
+                font-size: 28px;
+            }
+
+            aside nav ul li.submenu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside>
+            <h1>DAVID B.</h1>
+            <p class="tagline">Storyteller, critique & chroniqueur</p>
+
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPage('home'); return false;">ACCUEIL</a></li>
+                    <li><a href="#" onclick="showPage('articles'); return false;">ARTICLES</a>
+                        <ul>
+                            <li class="submenu"><a href="#">Bouffée</a></li>
+                            <li class="submenu"><a href="#">La Belle Allure</a></li>
+                            <li class="submenu"><a href="#">Ça m'agace</a></li>
+                            <li class="submenu"><a href="#">Curiosités</a></li>
+                            <li class="submenu"><a href="#">Ha Ha Ha</a></li>
+                            <li class="submenu"><a href="#">Nourriture pour l'esprit</a></li>
+                            <li class="submenu"><a href="#">Vu, Lu, Entendu</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" onclick="showPage('articles'); return false;">CINÉMA</a></li>
+                    <li><a href="#" onclick="showPage('articles'); return false;">PRINCE</a></li>
+                    <li><a href="#" onclick="showPage('about'); return false;">À PROPOS</a></li>
+                    <li><a href="#" onclick="showPage('contact'); return false;">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <div class="divider"></div>
+
+            <div class="footer-links">
+                <a href="#">POLITIQUE DE CONFIDENTIALITÉ</a>
+                <a href="#">MENTIONS LÉGALES</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <!-- HOME PAGE -->
+            <div id="home" class="page active">
+                <div class="home-header">
+                    <h1>DAVID B.</h1>
+                    <p>Storyteller, critique & chroniqueur</p>
+                </div>
+
+                <div class="quote-block">
+                    "De vous à moi, les yeux dans les yeux. Entre les salles obscures et les terrasses parisiennes, je raconte les histoires qui méritent d'être racontées."
+                </div>
+
+                <h2 style="font-size: 16px; font-weight: bold; margin: 40px 0 30px 0; letter-spacing: 1px;">DERNIERS ARTICLES</h2>
+
+                <div class="articles-grid">
+                    <div class="article-card" onclick="showPage('articles'); return false;">
+                        <div class="article-date">22 SEPT 2010</div>
+                        <a href="#" class="article-title">Lettre à une chère enfant chère à mon cœur</a>
+                        <p class="article-excerpt">Les films qu'on n'ira pas voir. Une mise en garde passionnée contre "Mange, prie, aime" et ses dangereuses simplifications.</p>
+                        <div class="article-meta">CRITIQUE • 2320 MOTS</div>
+                    </div>
+
+                    <div class="article-card" onclick="showPage('articles'); return false;">
+                        <div class="article-date">20 JAN 2011</div>
+                        <a href="#" class="article-title">Je vais au cinéma</a>
+                        <p class="article-excerpt">Sound of Norse, Love & other drugs, Somewhere. Condensé XXL d'une année cinématographique entre salles obscures, McDo et karaokés.</p>
+                        <div class="article-meta">CHRONIQUE • 4180 MOTS</div>
+                    </div>
+
+                    <div class="article-card" onclick="showPage('articles'); return false;">
+                        <div class="article-date">04 JUL 2019</div>
+                        <a href="#" class="article-title">BMW Films</a>
+                        <p class="article-excerpt">Fast, Furious & Publicité. Comment BMW a révolutionné le marketing avec des courts-métrages signés Fincher, Ridley Scott, Wong Kar Wai.</p>
+                        <div class="article-meta">ANALYSE • 1240 MOTS</div>
+                    </div>
+
+                    <div class="article-card" onclick="showPage('articles'); return false;">
+                        <div class="article-date">10 MAI 2010</div>
+                        <a href="#" class="article-title">De vous à moi, les yeux dans les yeux</a>
+                        <p class="article-excerpt">Dans ses yeux. Film argentin qui a fait la nique au Prophète aux Oscars. Critique d'un film "pas mal" qui ne mérite pas ses dithyrambes.</p>
+                        <div class="article-meta">CRITIQUE • 1890 MOTS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARTICLES PAGE -->
+            <div id="articles" class="page">
+                <h2 class="page-title">ARTICLES</h2>
+
+                <div style="margin-bottom: 60px;">
+                    <div class="article-card">
+                        <div class="article-date">22 SEPT 2010</div>
+                        <a href="#" class="article-title">Lettre à une chère enfant chère à mon cœur</a>
+                        <p class="article-excerpt">Les films qu'on n'ira pas voir. Une mise en garde passionnée contre "Mange, prie, aime" et ses dangereuses simplifications. L'arce que ce film est une merde. Et dangereux.</p>
+                        <div class="article-meta">CRITIQUE • 2320 MOTS</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <div class="article-card">
+                        <div class="article-date">20 JAN 2011</div>
+                        <a href="#" class="article-title">Je vais au cinéma</a>
+                        <p class="article-excerpt">Sound of Norse, Love & other drugs, Somewhere. Condensé XXL d'une année cinématographique entre salles obscures, McDo et karaokés de Pigalle. Pete Postlethwaite est mort.</p>
+                        <div class="article-meta">CHRONIQUE • 4180 MOTS</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <div class="article-card">
+                        <div class="article-date">04 JUL 2019</div>
+                        <a href="#" class="article-title">BMW Films</a>
+                        <p class="article-excerpt">Fast, Furious & Publicité. Comment BMW a révolutionné le marketing avec des courts-métrages signés Fincher, Ridley Scott, Wong Kar Wai. 65 millions de connexions.</p>
+                        <div class="article-meta">ANALYSE • 1240 MOTS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABOUT PAGE -->
+            <div id="about" class="page">
+                <h2 class="page-title">À PROPOS</h2>
+
+                <div class="about-section">
+                    <h2>Qui suis-je ?</h2>
+                    <p>
+                        David B. est un storyteller, critique et chroniqueur basé à Paris. Depuis plus de 15 ans, il observe, analyse et raconte les histoires qui méritent d'être racontées. Entre les salles obscures et les terrasses parisiennes, il cultive un regard acéré sur le cinéma, la culture et la création.
+                    </p>
+                    <p>
+                        Son écriture oscillation entre passion et provocation. Pas de consensus mou. Pas de bonne conscience. Juste de l'authenticité, des questions et du trouble.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Cinéma</h2>
+                    <p>
+                        Le cinéma est sa première obsession. De Godard à Wong Kar-Wai, de Bresson à Haneke. Il croit au pouvoir du cinéma comme art politique, éthique et poétique. La critique cinéma n'est jamais pure critique chez lui — c'est toujours une philosophie de la vie.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Prince</h2>
+                    <p>
+                        Prince est plus qu'un musicien. C'est une philosophie, une radicalité, une refus des conventions. David B. voit en Prince un modèle d'indépendance créative et d'intégrité artistique.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Culture & Influences</h2>
+                    <p>
+                        De la Nouvelle Vague française aux cinéastes asiatiques contemporains. De la poésie à la musique expérimentale. David B. s'alimente à des sources éclectiques pour une réflexion complexe sur le monde.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CONTACT PAGE -->
+            <div id="contact" class="page">
+                <h2 class="page-title">CONTACT</h2>
+
+                <p style="margin-bottom: 30px; font-size: 14px;">Vous avez une question, une observation, une critique ? N'hésitez pas à écrire.</p>
+
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">ENVOYER</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        DADAISME.ME • 2024 • STORIES & CHRONICLES
+    </footer>
+
+    <script>
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Merci pour votre message ! (Demo mode - pas d\'envoi réel)');
+            document.querySelector('.contact-form').reset();
+        }
+    </script>
+</body>
+</html>
