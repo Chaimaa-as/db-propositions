@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David B. - Storyteller, critique & chroniqueur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.4;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 40px 20px;
+            border-right: 2px solid #000;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar .tagline {
+            font-size: 11px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-item {
+            margin-bottom: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: block;
+            padding: 0;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .nav-link.active {
+            text-decoration: underline;
+        }
+
+        /* Submenu */
+        .submenu {
+            list-style: none;
+            margin-top: 10px;
+            margin-left: 0;
+        }
+
+        .submenu-item {
+            margin-bottom: 6px;
+        }
+
+        .submenu-link {
+            text-decoration: none;
+            color: #666;
+            font-size: 11px;
+            font-weight: normal;
+            text-transform: uppercase;
+            display: block;
+            padding: 0;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+        }
+
+        .submenu-link:hover {
+            text-decoration: underline;
+        }
+
+        .submenu-link.active {
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 60px 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-section {
+            margin-bottom: 60px;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding: 0 20px 30px 20px;
+            border-bottom: 2px solid #000;
+        }
+
+        .header-title {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            padding: 0;
+        }
+
+        .header-tagline {
+            font-size: 14px;
+            font-style: italic;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-divider {
+            display: none;
+        }
+
+        .intro {
+            margin-bottom: 60px;
+            font-size: 15px;
+            font-style: italic;
+            border-left: 4px solid #000;
+            padding-left: 20px;
+            line-height: 1.8;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 60px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .article {
+            padding-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .article:nth-child(odd):nth-last-child(1),
+        .article:nth-child(even):nth-last-child(1) {
+            border-bottom: none;
+        }
+
+        .article-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #999;
+        }
+
+        .article-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .article-title a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .article-title a:hover {
+            text-decoration: underline;
+        }
+
+        .article-excerpt {
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+            color: #999;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        .contact-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #fff;
+            border-top: 2px solid #000;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 250px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .modal p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .modal button {
+            background: #000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        ::selection {
+            background: #000;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 2px solid #000;
+                padding: 20px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+
+            .sidebar h1 {
+                font-size: 20px;
+                width: 100%;
+                margin-bottom: 0;
+            }
+
+            .sidebar .tagline {
+                width: 100%;
+                margin-bottom: 15px;
+                margin-top: 5px;
+            }
+
+            .nav-menu {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                width: 100%;
+                flex: none;
+            }
+
+            .nav-item {
+                margin-bottom: 0;
+            }
+
+            .submenu {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-wrapper {
+                padding: 30px 20px;
+            }
+
+            .header-title {
+                font-size: 28px;
+            }
+
+            footer {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            footer p:first-child {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <h1>DAVID B.</h1>
+            <p class="tagline">Storyteller, critique & chroniqueur</p>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" data-section="accueil">ACCUEIL</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="articles">ARTICLES</a>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a class="submenu-link" data-section="bouffe">Bouffe</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="allure">La Belle Allure</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="agace">Ça m'agace</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="beau">Curiosités</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="hahaha">Ha Ha Ha</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="nourriture">Nourriture pour l'esprit</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="cinema">Cinéma</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="prince">Prince</a></li>
+                        <li class="submenu-item"><a class="submenu-link" data-section="vu">Vu, Lu, Entendu</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="apropos">À PROPOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="contact">CONTACT</a>
+                </li>
+            </ul>
+        </nav>
+
+            <div style="border-top: 2px solid #000; margin-top: 40px; padding-top: 20px; font-size: 10px;">
+                <p><a href="#" onclick="openModal('privacyModal', event)" style="text-decoration: none; color: #000;">POLITIQUE DE CONFIDENTIALITÉ</a></p>
+                <p style="margin-top: 10px;"><a href="#" onclick="openModal('creditsModal', event)" style="text-decoration: none; color: #000;">MENTIONS LÉGALES</a></p>
+            </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Accueil -->
+                <div id="accueil" class="section-content active">
+                    <div class="header-section">
+                        <h1 class="header-title">DAVID B.</h1>
+                        <p class="header-tagline">Storyteller, critique & chroniqueur</p>
+                        <div class="header-divider"></div>
+                    </div>
+
+                    <div class="intro">
+                        "De vous à moi, les yeux dans les yeux. Entre les salles obscures et les terrasses parisiennes, je raconte les histoires qui méritent d'être racontées."
+                    </div>
+
+                    <h2 class="section-title">DERNIERS ARTICLES</h2>
+
+                    <div class="articles-grid">
+                        <div class="article">
+                            <div class="article-date">22 SEPT 2010</div>
+                            <h3 class="article-title">
+                                <a href="#">Lettre à une chère enfant chère à mon cœur</a>
+                            </h3>
+                            <p class="article-excerpt">
+                                Les films qu'on n'ira pas voir. Une mise en garde passionnée contre "Mange, prie, aime" et ses dangereuses simplifications.
+                            </p>
+                            <div class="article-meta">CRITIQUE • 2320 MOTS</div>
+                        </div>
+
+                        <div class="article">
+                            <div class="article-date">20 JAN 2011</div>
+                            <h3 class="article-title">
+                                <a href="#">Je vais au cinéma</a>
+                            </h3>
+                            <p class="article-excerpt">
+                                Sound of Norse, Love & other drugs, Somewhere. Condensé XXL d'une année cinématographique entre salles obscures, McDo et karaoké de Pigalle.
+                            </p>
+                            <div class="article-meta">CHRONIQUE • 4180 MOTS</div>
+                        </div>
+
+                        <div class="article">
+                            <div class="article-date">04 JUL 2019</div>
+                            <h3 class="article-title">
+                                <a href="#">BMW Films</a>
+                            </h3>
+                            <p class="article-excerpt">
+                                Fast, Furious & Publicité. Comment BMW a révolutionné le marketing avec des courts-métrages signés Fincher, Ridley Scott, Wong Kar Wai.
+                            </p>
+                            <div class="article-meta">ANALYSE • 1240 MOTS</div>
+                        </div>
+
+                        <div class="article">
+                            <div class="article-date">10 MAI 2010</div>
+                            <h3 class="article-title">
+                                <a href="#">De vous à moi, les yeux dans les yeux</a>
+                            </h3>
+                            <p class="article-excerpt">
+                                Dans ses yeux. Film argentin qui a fait la nique au Prophète aux Oscars. Critique d'un film "pas mal" qui ne mérite pas ses dithyrambes.
+                            </p>
+                            <div class="article-meta">CRITIQUE • 1890 MOTS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div id="contact" class="section-content">
+                    <h2 class="section-title">CONTACT</h2>
+                    <p style="margin-bottom: 30px; line-height: 1.8; font-size: 14px;">
+                        Vous avez une histoire à me raconter ? Un projet à discuter ? 
+                        N'hésitez pas à me contacter via le formulaire ci-dessous.
+                    </p>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Votre message" rows="8" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">ENVOYER</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p style="margin-bottom: 10px;">David B. • 2024 • Stories & Chronicles</p>
+        <p style="font-size: 10px;">
+            <a href="#" onclick="openModal('privacyModal', event)" style="margin: 0 5px;">Politique de confidentialité</a> •
+            <a href="#" onclick="openModal('creditsModal', event)" style="margin: 0 5px;">Mentions légales</a>
+        </p>
+    </footer>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <h2>Politique de confidentialité</h2>
+            <p><strong>Collecte de données :</strong> Ce site collecte uniquement les informations que vous nous fournissez volontairement 
+                via le formulaire de contact (nom, email, message).</p>
+            <p><strong>Utilisation :</strong> Vos données sont utilisées uniquement pour répondre à vos demandes et ne seront jamais 
+                partagées avec des tiers.</p>
+            <p><strong>Cookies :</strong> Ce site n'utilise pas de cookies de suivi ou de publicité.</p>
+            <p><strong>Droits :</strong> Vous avez le droit d'accéder, modifier ou supprimer vos données personnelles en nous contactant.</p>
+            <button onclick="closeModal('privacyModal')">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Credits Modal -->
+    <div id="creditsModal" class="modal">
+        <div class="modal-content">
+            <h2>Mentions légales</h2>
+            <p><strong>Design & Développement :</strong> David B.</p>
+            <p><strong>Typographie :</strong> Arial</p>
+            <p><strong>Inspiration :</strong> Minimalisme, design épuré et focus sur le contenu.</p>
+            <p><strong>Année :</strong> 2024</p>
+            <button onclick="closeModal('creditsModal')">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId, e) {
+            e.preventDefault();
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (e.target.id === 'privacyModal') {
+                closeModal('privacyModal');
+            }
+            if (e.target.id === 'creditsModal') {
+                closeModal('creditsModal');
+            }
+        });
+
+        document.querySelectorAll('.nav-link, .submenu-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const section = this.dataset.section;
+
+                document.querySelectorAll('.section-content').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                document.querySelectorAll('.nav-link, .submenu-link').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                if (document.getElementById(section)) {
+                    document.getElementById(section).classList.add('active');
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

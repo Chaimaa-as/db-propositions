@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David B.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.4;
+            font-size: 16px;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        a {
+            color: #000;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 40px; /* Espace entre la nav et le contenu */
+        }
+
+        .sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            padding-top: 10px;
+            /* NOUVELLES RÈGLES CI-DESSOUS */
+            border-right: 1px solid #ccc; /* Bordure fine et grise */
+            padding-right: 40px; /* Espace entre le texte de la nav et la bordure */
+        }
+
+        .site-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 60px;
+        }
+
+        .nav a {
+            display: block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .content-wrapper {
+            flex-grow: 1;
+            padding-top: 10px;
+            /* SUPPRESSION DE LA BORDURE ET DU PADDING */
+        }
+        
+        .intro {
+            margin-bottom: 60px;
+            font-size: 18px;
+            font-style: italic;
+            border-left: 4px solid #000;
+            padding-left: 20px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .articles-list {
+            list-style: none;
+        }
+        
+        .article {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .article:last-child {
+            border-bottom: none;
+        }
+        
+        .article-header {
+            margin-bottom: 10px;
+        }
+        
+        .article-date {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .article-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .article-title a {
+            text-decoration: none;
+        }
+        
+        .article-excerpt {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .article-meta {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .footer {
+            margin-top: 80px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .main-layout {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+                text-align: center;
+                border-right: none; /* On retire la bordure sur mobile */
+                padding-right: 0;
+            }
+
+            .tagline {
+                margin-bottom: 30px;
+            }
+            
+            .nav {
+                display: flex;
+                justify-content: space-around;
+                border-top: 2px solid #000;
+                border-bottom: 2px solid #000;
+                padding: 15px 0;
+            }
+            
+            .nav a {
+                margin-bottom: 0;
+            }
+        }
+        
+        /* Effet de sélection */
+        ::selection {
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <h1 class="site-title">David B.</h1>
+            <p class="tagline">Storyteller, critique & chroniqueur</p>
+            <nav class="nav">
+                <a href="#accueil">Accueil</a>
+                <a href="#articles">Articles</a>
+                <a href="#about">À propos</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </aside>
+
+        <div class="content-wrapper">
+            <div class="intro">
+                "De vous à moi, les yeux dans les yeux. Entre les salles obscures et les terrasses parisiennes, 
+                je raconte les histoires qui méritent d'être racontées."
+            </div>
+
+            <main>
+                <section id="accueil">
+                    <h2 class="section-title">Articles</h2>
+                    <ul class="articles-list">
+                        <!-- Les articles restent les mêmes -->
+                        <li class="article">
+                            <div class="article-header">
+                                <div class="article-date">22 Sept 2010</div>
+                                <h3 class="article-title">
+                                    <a href="#">Lettre à une chère enfant chère à mon coeur</a>
+                                </h3>
+                            </div>
+                            <p class="article-excerpt">
+                                Les films qu'on n'ira pas voir. Une mise en garde passionnée contre "Mange, prie, aime" 
+                                et ses dangereuses simplifications. Parce que ce film est une merde. Et dangereux.
+                            </p>
+                            <div class="article-meta">Critique • 2320 mots</div>
+                        </li>
+
+                        <li class="article">
+                            <div class="article-header">
+                                <div class="article-date">20 Jan 2011</div>
+                                <h3 class="article-title">
+                                    <a href="#">Je vais au cinéma</a>
+                                </h3>
+                            </div>
+                            <p class="article-excerpt">
+                                Sound of Noise, Love & other drugs, Somewhere. Condensé XXL d'une année cinématographique 
+                                entre salles obscures, McDo et karaokés de Pigalle. Pete Postlethwaite est mort.
+                            </p>
+                            <div class="article-meta">Chronique • 4180 mots</div>
+                        </li>
+
+                        <li class="article">
+                            <div class="article-header">
+                                <div class="article-date">04 Jul 2019</div>
+                                <h3 class="article-title">
+                                    <a href="#">BMW Films</a>
+                                </h3>
+                            </div>
+                            <p class="article-excerpt">
+                                Fast, Furious & Publicité. Comment BMW a révolutionné le marketing avec des courts-métrages 
+                                signés Fincher, Ridley Scott, Wong Kar Wai. 65 millions de connexions.
+                            </p>
+                            <div class="article-meta">Analyse • 1240 mots</div>
+                        </li>
+
+                        <li class="article">
+                            <div class="article-header">
+                                <div class="article-date">10 Mai 2010</div>
+                                <h3 class="article-title">
+                                    <a href="#">De vous à moi, les yeux dans les yeux</a>
+                                </h3>
+                            </div>
+                            <p class="article-excerpt">
+                                Dans ses yeux. Film argentin qui a fait la nique au Prophète aux Oscars. 
+                                Critique d'un film "pas mal" qui ne mérite pas ses dithyrambes. McDo/ciné sous la pluie.
+                            </p>
+                            <div class="article-meta">Critique • 1890 mots</div>
+                        </li>
+
+                        <li class="article">
+                            <div class="article-header">
+                                <div class="article-date">09 Mar 2017</div>
+                                <h3 class="article-title">
+                                    <a href="#">Et si on partait ? Et si on restait ?</a>
+                                </h3>
+                            </div>
+                            <p class="article-excerpt">
+                                Analyse comparative des pubs tourism office : Baz Luhrmann vs Inde. 
+                                Fascination pour les cascades de flotte et le Festival de l'Huître de Galway.
+                            </p>
+                            <div class="article-meta">Publicité • 680 mots</div>
+                        </li>
+
+                        <li class="article">
+                            <div class="article-header">
+                                <div class="article-date">05 Nov 2003</div>
+                                <h3 class="article-title">
+                                    <a href="#">Mais que fait la police ?</a>
+                                </h3>
+                            </div>
+                            <p class="article-excerpt">
+                                Histoire et dictionnaire de la police chez Bouquins. De Nicolas de La Reynie 
+                                au 20e siècle. Flics, rousse, condés, maréchaussée. Préface signée Dominique.
+                            </p>
+                            <div class="article-meta">Chronique • 520 mots</div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <p>David B. • 2025 • Stories & Chronicles</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
