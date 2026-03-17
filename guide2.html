@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'utilisation – Dadais.me</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111111;
+            --sidebar-bg: #f9f9f9;
+            --border-color: #eaeaea;
+            --accent-color: #0056b3;
+            --code-bg: #f4f4f4;
+            --placeholder-bg: #f0f0f0;
+            --placeholder-border: #cccccc;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --sidebar-bg: #1e1e1e;
+                --border-color: #333333;
+                --accent-color: #4da3ff;
+                --code-bg: #2d2d2d;
+                --placeholder-bg: #2a2a2a;
+                --placeholder-border: #555555;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            /* Modification de la police pour Arial */
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        aside h2 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        aside ul { list-style: none; padding: 0; margin: 0; }
+        aside li { margin-bottom: 0.8rem; }
+        aside a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: block;
+        }
+        aside a:hover { color: var(--accent-color); font-weight: bold;}
+
+        /* Main Content */
+        main {
+            margin-left: 280px;
+            padding: 4rem;
+            max-width: 900px;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.2rem; color: gray; margin-bottom: 3rem; }
+        
+        section {
+            margin-bottom: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        h2 { font-size: 1.8rem; margin-top: 0; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.3rem; margin-top: 2rem; color: var(--accent-color); }
+
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        li { margin-bottom: 0.8rem; } /* Espacement augmenté pour plus de clarté dans les étapes */
+
+        /* Code & Preformatted text */
+        code {
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Placeholder pour les captures d'écran */
+        .img-placeholder {
+            background-color: var(--placeholder-bg);
+            border: 2px dashed var(--placeholder-border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            color: gray;
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        /* Style pour les futures images réelles pour qu'elles s'intègrent bien */
+        img.capture {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Accordions / Tips */
+        details {
+            background-color: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "💡"; margin-right: 10px; }
+        details[open] summary {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1.5rem;
+            }
+            main { margin-left: 0; padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <h2>Sommaire</h2>
+        <ul>
+            <li><a href="#intro">👋 Bienvenue</a></li>
+            <li><a href="#connexion">1. Se connecter</a></li>
+            <li><a href="#espace">2. L'espace de travail</a></li>
+            <li><a href="#langues">3. Rédiger (FR / EN)</a></li>
+            <li><a href="#affichage">4. Maîtriser l'affichage</a></li>
+            <li><a href="#seo">5. Gérer le SEO</a></li>
+            <li><a href="#footer">6. Pied de page</a></li>
+            <li><a href="#auto">7. Fonctions automatiques</a></li>
+            <li><a href="#maj">8. Mises à jour</a></li>
+            <li><a href="#moulinette">9. La Moulinette</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <div id="intro">
+            <h1>Guide d'utilisation</h1>
+            <div class="subtitle">David Batusanski — Dadais.me</div>
+            <p>Bienvenue sur ton nouveau site ! L'interface (WordPress) a été entièrement nettoyée et taillée sur-mesure pour s'adapter à ton design minimaliste.</p>
+            <p>L'objectif de ce guide est de te rendre 100% autonome sur la publication et l'import de tes archives, sans jamais risquer de "casser" l'esthétique du site. Voici tout ce que tu dois savoir étape par étape.</p>
+        </div>
+
+        <section id="connexion">
+            <h2>1. Se connecter à ton espace</h2>
+            <p>Avant de pouvoir rédiger, il faut entrer dans la salle des machines (le "Back-office" de WordPress). Voici la marche à suivre :</p>
+            <ol>
+                <li>Ouvre ton navigateur et tape exactement cette adresse dans la barre de recherche : <code>dadais.me/wp-admin</code>.</li>
+                <li>Tu arrives sur une page avec le logo WordPress. Dans la première case, entre ton <strong>Identifiant</strong> (ou ton adresse email).</li>
+                <li>Dans la seconde case, entre ton <strong>Mot de passe</strong>.</li>
+                <li>Clique sur le bouton bleu <strong>Se connecter</strong>.</li>
+            </ol>
+            
+            <!-- Remplace ce bloc div par ta balise img -->
+            <div class="img-placeholder">
+                📸[Capture d'écran de la page de connexion wp-admin avec des flèches sur les champs]
+            </div>
+
+            <details>
+                <summary>Astuce : Mot de passe oublié ?</summary>
+                <p>Si un jour tu as un trou de mémoire, clique simplement sur le lien <em>"Mot de passe oublié ?"</em> situé juste en dessous du bouton "Se connecter" pour recevoir un lien de réinitialisation sécurisé par email.</p>
+            </details>
+        </section>
+
+        <section id="espace">
+            <h2>2. Comprendre ton espace de travail</h2>
+            <p>Une fois connecté, toute ton attention doit se porter sur <strong>le menu noir situé à gauche de ton écran</strong>. C'est ici que tu vas trouver les grands types de contenus qui structurent ton site :</p>
+            
+            <div class="img-placeholder">
+                📸[Capture d'écran du menu latéral gauche de WordPress, idéalement avec des cadres rouges autour de Articles, Pages, etc.]
+            </div>
+
+            <ul>
+                <li><strong>Articles :</strong> C'est ton Blog classique (ex: <em>La belle allure, Lu, vu, entendu</em>). C'est ici que tu iras le plus souvent.</li>
+                <li><strong>Quelques Travaux :</strong> Ton portfolio pro (ex: <em>Campagne Alpha</em>).</li>
+                <li><strong>Réflexions :</strong> Tes essais et pensées longues.</li>
+                <li><strong>Pages :</strong> Tes pages fixes (Accueil, À Propos, Offre, Contact).</li>
+                <li><strong>Médias :</strong> La bibliothèque où sont stockées toutes tes images et vidéos de façon centralisée.</li>
+            </ul>
+        </section>
+
+        <section id="langues">
+            <h2>3. Rédiger dans les deux langues (FR / EN)</h2>
+            <p>Le site utilise l'extension professionnelle <em>Polylang</em> pour gérer le bilinguisme de façon parfaitement étanche.</p>
+            <ol>
+                <li>Commence par créer ton article (ou ta page) normalement en français. Rédige ton texte et ajoute tes images.</li>
+                <li>Une fois terminé, regarde dans la <strong>colonne de droite</strong> de ton écran, assure-toi d'être sur l'onglet <strong>Article</strong>.</li>
+                <li>Fais défiler vers le bas jusqu'à trouver la section <strong>Langues</strong>. Tu y verras le drapeau français 🇫🇷, indiquant que cet article est en français.</li>
+                <li>Juste en dessous, à côté du drapeau anglais 🇬🇧, clique sur le <strong>petit bouton (+)</strong>.</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸[Capture d'écran de la colonne de droite, encart "Langues", avec une grosse flèche pointant vers le bouton (+)]
+            </div>
+
+            <ol start="5">
+                <li>Le site va charger une nouvelle page vierge. Ne t'inquiète pas, c'est normal ! C'est la version anglaise qui vient d'être liée à ta version française. Tu n'as plus qu'à y coller ta traduction et à publier.</li>
+            </ol>
+            <p><em>Note : Le passage de l'une à l'autre se fera automatiquement dans le menu de navigation en haut à droite pour le visiteur !</em></p>
+        </section>
+
+        <section id="affichage">
+            <h2>4. Maîtriser l'affichage (Textes & Images)</h2>
+            
+            <h3>A. Contrôler les résumés d'articles ("Lire la suite")</h3>
+            <p>Sur tes pages de listes (Blog, Travaux, Réflexion), tes articles affichent un court texte d'introduction. Par défaut, WordPress coupe le texte tout seul, ce qui peut casser ton esthétique. Pour un rendu parfait :</p>
+            <ol>
+                <li>Dans l'éditeur de ton article, regarde la colonne de droite (onglet <strong>Article</strong>).</li>
+                <li>Cherche la section nommée <strong>Extrait</strong> (ou <em>Excerpt</em>) et clique dessus pour la déplier.</li>
+                <li>Rédige (ou copie-colle) dans cette case la ou les deux phrases que tu veux afficher comme accroche. C'est ce texte précis qui s'affichera sur l'accueil !</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸[Capture d'écran de la case "Extrait" dans la colonne de droite]
+            </div>
+
+            <h3>B. Le secret des galeries ("Voir la suite")</h3>
+            <p>Si tu publies une galerie d'images (sans texte) et que tu veux que le bouton devienne <em>"Voir la suite"</em> au lieu de <em>"Lire la suite"</em>, il faut le préciser au système :</p>
+            <ol>
+                <li>Toujours dans la colonne de droite de ton article, cherche la section <strong>Étiquettes</strong> (ou Tags).</li>
+                <li>Dans le champ de saisie, tape exactement le mot <code>image</code> (ou <code>galerie</code>).</li>
+                <li>Appuie sur la touche <strong>Entrée</strong> de ton clavier pour valider (le mot doit apparaître sous forme de petite bulle).</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸 [Capture d'écran de la case "Étiquettes" avec le tag "image" validé]
+            </div>
+        </section>
+
+        <section id="seo">
+            <h2>5. Gérer ton SEO (sans casser ton design)</h2>
+            
+            <h3>A. Tes mots-clés sur la page "Offre"</h3>
+            <p>Pour éviter que ton site ne soit pénalisé par Google pour "texte caché", j'ai créé un menu déroulant ("Accordéon") discret en bas de la page Offre.</p>
+            <ol>
+                <li>Va dans <strong>Pages</strong> et clique sur "Offre" pour l'éditer.</li>
+                <li>Descends tout en bas de la page dans l'éditeur. Tu verras le bloc accordéon.</li>
+                <li>Clique à l'intérieur pour le déplier et tape tes nouveaux mots-clés à la suite des autres. Google les lira parfaitement !</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸 [Capture d'écran de l'éditeur Gutenberg montrant le bloc accordéon déplié avec des mots clés à l'intérieur]
+            </div>
+
+            <h3>B. Les "Info-bulles" (Titres pour Google)</h3>
+            <p>Tout est automatisé via l'outil <strong>SEOPress</strong>. Par défaut, le site affiche : <em>Nom de la page – Stratégie de contenus – Dadais.me</em>.</p>
+            <ol>
+                <li>Pour modifier cela sur une page précise, ouvre ta page dans l'éditeur.</li>
+                <li>Descends <strong>tout en bas de la page</strong>, en dessous de la zone de texte blanche.</li>
+                <li>Tu trouveras un grand encart nommé <strong>SEO</strong>. Cherche le champ <strong>Titre SEO</strong> et modifie-le comme tu le souhaites.</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸 [Capture d'écran du bas de page montrant l'encart SEOPress et le champ "Titre SEO"]
+            </div>
+        </section>
+
+        <section id="footer">
+            <h2>6. Modifier les petits textes (Pied de page, Slogan)</h2>
+            <p>Pour modifier le texte "Depuis 2004", "Mentions légales", ou ton slogan principal sans toucher au code :</p>
+            <ol>
+                <li>Dans le menu noir de gauche, passe ta souris sur <strong>Langues</strong>.</li>
+                <li>Clique sur <strong>Traductions de chaînes</strong>.</li>
+                <li>Tu vas voir une liste de petites phrases. Modifie le texte désiré dans la colonne française et dans la colonne anglaise.</li>
+                <li>N'oublie pas de cliquer sur <strong>Enregistrer les modifications</strong> en bas.</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸 [Capture d'écran de la page Polylang "Traductions de chaînes"]
+            </div>
+        </section>
+
+        <section id="auto">
+            <h2>7. Les fonctionnalités automatiques</h2>
+            <p>En haut à droite de ton site, tu as un petit menu utilitaire (<code>🔍 FR EN RSS</code>). Tout est 100% automatisé :</p>
+            <ul>
+                <li><strong>La Loupe (Recherche) :</strong> Dès que tu publies un article ou ajoutes un mot-clé, le moteur interne le prend en compte instantanément. Tu n'as rien à configurer.</li>
+                <li><strong>Le lien RSS :</strong> C'est un flux généré pour tes lecteurs. Chaque nouvel article y est envoyé sans aucune action de ta part.</li>
+            </ul>
+        </section>
+
+        <section id="maj">
+            <h2>8. L'entretien du site (Mises à jour)</h2>
+            <p>Le web évolue constamment. De temps en temps, tu verras des pastilles rouges ou oranges dans ton menu de gauche. C'est le signal qu'il faut faire l'entretien de la machine.</p>
+            <ol>
+                <li>Dans le menu de gauche, clique sur <strong>Extensions > Extensions installées</strong>.</li>
+                <li>Fais défiler la liste. Si un outil a besoin d'être mis à jour, il sera surligné avec un bandeau jaune.</li>
+                <li>Clique simplement sur le lien bleu <strong>Mettre à jour maintenant</strong> et patiente quelques secondes.</li>
+            </ol>
+            <p><em>Règle d'or : Fais-le environ 1 fois par mois pour des raisons de sécurité. Ton design sur-mesure ne cassera pas.</em></p>
+
+            <div class="img-placeholder">
+                📸[Capture d'écran de la page des extensions avec le bandeau jaune et le lien "mettre à jour maintenant" entouré en rouge]
+            </div>
+        </section>
+
+        <section id="moulinette">
+            <h2>9. Utiliser la "Moulinette" (Import auto)</h2>
+            <p>J'ai développé un petit logiciel sur-mesure pour importer tes archives en masse. Pour que cela fonctionne, la machine a besoin que tu sois <strong>très rigoureux sur la façon d'écrire tes fichiers</strong>.</p>
+
+            <h3>A. Le formatage des Articles (Fichiers .txt)</h3>
+            <p>Chaque fichier texte que tu crées sur ton ordinateur doit respecter strictement cet ordre sur les 6 premières lignes :</p>
+            <pre>Ligne 1 : Catégorie1, Catégorie2
+Ligne 2 : tag1, tag2, tag3
+Ligne 3 : 
+Ligne 4 : Le titre complet de l'article
+Ligne 5 : 
+Ligne 6 : Début de ton texte ici...</pre>
+
+            <div class="img-placeholder">
+                📸[Capture d'écran d'un fichier .txt ouvert dans le Bloc-notes, montrant bien la structure avec les lignes vides au bon endroit]
+            </div>
+
+            <details>
+                <summary>Règles pour les tags et les vidéos</summary>
+                <ul>
+                    <li><strong>Tags :</strong> Sépare les mots par des virgules. Ne mets pas de chevrons <code>&lt;film&gt;</code>, le logiciel ne comprendra pas.</li>
+                    <li><strong>Vidéo (Youtube/Vimeo) :</strong> Mets l'URL toute seule sur une ligne, sans aucun texte autour. WordPress s'occupera d'afficher le lecteur.</li>
+                    <li><strong>Lien cliquable :</strong> Utilise cette syntaxe avec crochets et parenthèses : <code>[Texte à cliquer](https://lenomdusite.com)</code></li>
+                </ul>
+            </details>
+
+            <h3>B. L'import des Images (Galeries)</h3>
+            <ol>
+                <li>Place toutes tes photos dans un seul dossier sur ton ordinateur.</li>
+                <li>Dans ce même dossier, crée un fichier texte nommé très exactement : <code>liste_photos.txt</code></li>
+                <li>À l'intérieur, liste tes photos ligne par ligne avec cette syntaxe exacte (Nom du fichier, un espace, deux points, un espace, puis tes tags) :</li>
+            </ol>
+            <pre>hotel-nice.jpg : voyage, hotel, cote d'azur
+plage-galets.jpg : mer, soleil, baignade, image
+081127-veste.jpg : la belle allure, mode</pre>
+            <p><em>(Rappel : N'oublie pas le tag <code>image</code> si tu veux que le bouton du site affiche "Voir la suite" !)</em></p>
+
+            <h3>C. Lancer l'importation</h3>
+            <p>Une fois tes fichiers prêts sur ton ordinateur :</p>
+            <ol>
+                <li>Double-clique sur le programme <strong>Moulinette-Dadais</strong> que je t'ai fourni.</li>
+                <li>Une petite fenêtre va s'ouvrir : navigue dans ton ordinateur et <strong>sélectionne le dossier</strong> contenant tes textes et images.</li>
+                <li>Laisse le programme tourner. Il va te créer un fichier magique nommé <code>import_final.csv</code> dans ce même dossier.</li>
+            </ol>
+            
+            <div class="img-placeholder">
+                📸[Capture d'écran de l'application "Moulinette" ou de la fenêtre demandant de choisir le dossier]
+            </div>
+
+            <ol start="4">
+                <li>Retourne sur ton site WordPress. Dans le menu de gauche, clique sur <strong>All Import > Nouvel Import</strong>.</li>
+                <li>Clique sur le bouton "Upload a file" et choisis ton fichier <code>import_final.csv</code>.</li>
+                <li>Laisse-toi guider par les écrans bleus en cliquant sur "Continuer". Tes archives sont en ligne ! 🎉</li>
+            </ol>
+
+            <div class="img-placeholder">
+                📸[Capture d'écran de l'interface WP All Import (Nouvel Import) avec le bouton Upload a file]
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('aside a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if(targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 40,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
